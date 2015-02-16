@@ -15,18 +15,11 @@ body {
     margin: 0;
     padding: 0;
 }
-#map-container {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    margin-top: 0;
-    bottom: 0;
-}
 #map {
     position: relative;
-    height: 100%;
+    width: 500px;;
+    height: 500px;
 }
-
 .vehicle-marker {
     fill: red;
 }
