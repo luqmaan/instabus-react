@@ -9,3 +9,4 @@ React.render(<App />, document.getElementById('app'));
 
 var RouteStore = window.RouteStore = require('./stores/RouteStore');
 var StopStore = window.StopStore = require('./stores/StopStore');
+var PolylineStore = window.PolylineStore = require('./stores/PolylineStore');

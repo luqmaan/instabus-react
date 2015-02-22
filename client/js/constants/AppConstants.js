@@ -5,6 +5,7 @@ module.exports = {
         ROUTE_HIDE: 'ROUTE_HIDE',
         RECEIVE_RAW_ROUTES: 'RECEIVE_RAW_ROUTES',
         RECEIVE_RAW_STOPS: 'RECEIVE_RAW_STOPS',
+        RECEIVE_RAW_POLYLINES: 'RECEIVE_RAW_POLYLINES',
     },
     PayloadSources: {
         SERVER_ACTION: 'SERVER_ACTION',

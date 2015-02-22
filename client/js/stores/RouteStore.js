@@ -45,7 +45,9 @@ var RouteStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrentRouteIds() {
-        return _currentRouteIds;
+        var ids = [];
+        _currentRouteIds.forEach((id) => ids.push(id));
+        return ids;
     },
 
     getCurrent() {
@@ -62,7 +64,7 @@ var RouteStore = assign({}, EventEmitter.prototype, {
 
     isCurrent(routeId) {
         return _currentRouteIds.has(routeId);
-    }
+    },
 });
 
 

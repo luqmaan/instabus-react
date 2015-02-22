@@ -4,17 +4,20 @@ var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var RouteStore = require('../stores/RouteStore');
+var GTFSUtils = require('../utils/GTFSUtils');
 
 var CHANGE_EVENT = 'change';
 
-var _stops = {};
+var _polylines = {};
 
-function _addStops(routeId, rawStops) {
-    _stops[routeId] = rawStops;
+function _addPolylines(routeId, rawPolylines) {
+    rawPolylines.forEach((rawPolyline) => {
+        _polylines[routeId] = GTFSUtils.convertRawPolyline(rawPolyline);
+    });
 }
 
 
-var StopStore = assign({}, EventEmitter.prototype, {
+var PolylineStore = assign({}, EventEmitter.prototype, {
     emitChange() {
         this.emit(CHANGE_EVENT);
     },
@@ -28,25 +31,22 @@ var StopStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrent() {
-        var currentStops = {};
+        var currentPolylines = [];
 
-        RouteStore.getCurrentRouteIds().map((routeId) => {
-            var stopsForRoute = _stops[routeId] || [];
-            stopsForRoute.forEach((stop) => {
-                currentStops[stop.stop_id] = stop;
-            });
-        });
+        RouteStore.getCurrentRouteIds().map(
+            (routeId) => currentPolylines.push(_polylines[routeId])
+        );
 
-        return Object.keys(currentStops).map((key) => currentStops[key]);
+        return currentPolylines;
     },
 
     getAll() {
-        return _stops;
+        return _polylines;
     }
 });
 
 
-StopStore.dispatchToken = AppDispatcher.register((payload) => {
+PolylineStore.dispatchToken = AppDispatcher.register((payload) => {
     AppDispatcher.waitFor([
         RouteStore.dispatchToken,
     ]);
@@ -54,9 +54,9 @@ StopStore.dispatchToken = AppDispatcher.register((payload) => {
     var action = payload.action;
 
     switch(action.type) {
-        case AppConstants.ActionTypes.RECEIVE_RAW_STOPS:
-            _addStops(action.routeId, action.rawStops);
-            StopStore.emitChange();
+        case AppConstants.ActionTypes.RECEIVE_RAW_POLYLINES:
+            _addPolylines(action.routeId, action.rawPolylines);
+            PolylineStore.emitChange();
             break;
 
         default:
@@ -64,4 +64,4 @@ StopStore.dispatchToken = AppDispatcher.register((payload) => {
     }
 });
 
-module.exports = StopStore;
+module.exports = PolylineStore;

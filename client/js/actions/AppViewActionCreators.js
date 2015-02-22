@@ -7,16 +7,17 @@ module.exports = {
     showRoute(routeId) {
         AppDispatcher.handleViewAction({
             type: AppConstants.ActionTypes.ROUTE_SHOW,
-            routeId: routeId
+            routeId: routeId,
         });
 
         GTFSWebAPIUtils.getStopsForRoute(routeId);
+        GTFSWebAPIUtils.getPolylinesForRoute(routeId);
     },
 
     hideRoute(routeId) {
         AppDispatcher.handleViewAction({
             type: AppConstants.ActionTypes.ROUTE_HIDE,
-            routeId: routeId
+            routeId: routeId,
         });
     }
 };

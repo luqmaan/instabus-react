@@ -16,5 +16,13 @@ module.exports = {
             routeId: routeId,
             rawStops: rawStops,
         });
+    },
+
+    receivePolylines(routeId, rawPolylines) {
+        AppDispatcher.handleServerAction({
+            type: AppConstants.ActionTypes.RECEIVE_RAW_POLYLINES,
+            routeId: routeId,
+            rawPolylines: rawPolylines,
+        });
     }
 };
