@@ -1,7 +1,7 @@
 
 module.exports = {
     ActionTypes: {
-        ROUTE_SHOW: 'ROUTE_SHOW',
+        CLICK_ROUTE: 'CLICK_ROUTE',
         RECEIVE_RAW_ROUTES: 'RECEIVE_RAW_ROUTES',
     },
     PayloadSources: {

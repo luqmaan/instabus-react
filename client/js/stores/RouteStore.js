@@ -1,4 +1,5 @@
 var assign = require('object-assign');
+var Set = require('es6-set');
 var EventEmitter = require('events').EventEmitter;
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -7,13 +8,17 @@ var AppConstants = require('../constants/AppConstants');
 var CHANGE_EVENT = 'change';
 
 var _routes = {};
-var _currentRouteIds = [];
+var _currentRouteIds = new Set([]);
 
 
 function _addRoutes(rawRoutes) {
     rawRoutes.forEach(function(routeData) {
         _routes[routeData.route_id] = routeData;
     });
+}
+
+function _addCurrentRoute(routeId) {
+    _currentRouteIds.add(routeId);
 }
 
 
@@ -23,11 +28,7 @@ var RouteStore = assign({}, EventEmitter.prototype, {
     },
 
     addChangeListener(callback) {
-        console.log('registered change listener', callback);
-        this.on(CHANGE_EVENT, () => {
-            console.log('change event fired callback');
-            callback();
-        });
+        this.on(CHANGE_EVENT, callback);
     },
 
     removeChangeListener(callback) {
@@ -39,7 +40,11 @@ var RouteStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrent() {
-        return _currentRouteIds.map(this.get);
+        var currentRoutes = [];
+        for (var routeId of _currentRouteIds) {
+            currentRoutes.push(this.get(routeId));
+        }
+        return currentRoutes;
     },
 
     getAll() {
@@ -55,7 +60,11 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
 
         case AppConstants.ActionTypes.RECEIVE_RAW_ROUTES:
             _addRoutes(action.rawRoutes);
-            console.log('about to RouteStore.emitChange')
+            RouteStore.emitChange();
+            break;
+
+        case AppConstants.ActionTypes.CLICK_ROUTE:
+            _addCurrentRoute(action.routeId);
             RouteStore.emitChange();
             break;
 

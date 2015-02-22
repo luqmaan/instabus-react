@@ -37,27 +37,22 @@ var App = React.createClass({
         RouteStore.removeChangeListener(this._onChange);
     },
 
-    handleRouteChange(routeId) {
-        console.log(routeId);
-    },
-
     render() {
-        // var routeDetails = !this.state.currentRoutes.length ? null : (
-        //     <div>
-        //         <h1>{this.state.currentRoutes}</h1>
-        //         <ArrivalSection arrivals={this.state.arrivals} />
-        //         <MapSection
-        //             id="map-controller"
-        //             initialPosition={[30.267153, -97.743061]}
-        //             polylines={this.state.polylines}
-        //             vehicles={this.state.vehicles}
-        //             stops={this.state.stops} />
-        //     </div>
-        // );
+
+        var visibleRoutesSection = this.state.currentRoutes.map((route) => {
+            return (
+                <div key={'visiblerouteheader:' + route.route_id}>{route.name}</div>
+            );
+        })
 
         return (
             <div>
-                <RouteSection routes={this.state.routes} currentRoutes={this.state.currentRoutes} onRouteSelected={this.handleRouteChange} />
+                <h3>All Routes</h3>
+                <RouteSection routes={this.state.routes} currentRoutes={this.state.currentRoutes} />
+                <div>
+                    <h3>Visible Routes</h3>
+                    {visibleRoutesSection}
+                </div>
             </div>
         );
     }

@@ -1,5 +1,8 @@
 var React = require('React');
 
+var AppViewActionCreators = require('../actions/AppViewActionCreators');
+var RouteListItem = require('./RouteListItem.react');
+
 
 var RouteSection = React.createClass({
 
@@ -9,20 +12,16 @@ var RouteSection = React.createClass({
 
     render() {
         var routeIds = Object.keys(this.props.routes);
-        var routes = routeIds.map((routeId) => {
+
+        var routeListItems = routeIds.map((routeId) => {
             var route = this.props.routes[routeId];
             return (
-                <li key={routeId} onClick={this.props.onRouteSelected.bind(null, routeId)}>
-                    <span>{routeId}</span>
-                    <span>{route.name}</span>
-                </li>
+                <RouteListItem route={route} key={'routelistitem:' + routeId} />
             );
         }, this);
 
         return (
-            <ul>
-                {routes}
-            </ul>
+            <ul>{routeListItems}</ul>
         );
     }
 
