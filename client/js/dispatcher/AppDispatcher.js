@@ -11,6 +11,7 @@ var AppDispatcher = assign(new Dispatcher(), {
             source: AppConstants.PayloadSources.SERVER_ACTION,
             action: action,
         };
+        console.log('server dispatch', action);
         this.dispatch(payload);
     },
 
@@ -19,6 +20,7 @@ var AppDispatcher = assign(new Dispatcher(), {
             source: AppConstants.PayloadSources.VIEW_ACTION,
             action: action,
         };
+        console.log('view dispatch', action);
         this.dispatch(payload);
     }
 

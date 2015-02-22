@@ -41,21 +41,10 @@ var App = React.createClass({
     },
 
     render() {
-
-        var visibleRoutesSection = this.state.currentRoutes.map((route) => {
-            return (
-                <div key={'visiblerouteheader:' + route.route_id}>{route.name}</div>
-            );
-        });
-
         return (
             <div>
                 <h3>All Routes</h3>
                 <RouteSection routes={this.state.routes} currentRoutes={this.state.currentRoutes} />
-                <div>
-                    <h3>Visible Routes</h3>
-                    {visibleRoutesSection}
-                </div>
                 <MapSection
                     id="map-controller"
                     initialPosition={[30.267153, -97.743061]}

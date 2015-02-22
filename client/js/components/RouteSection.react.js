@@ -1,6 +1,7 @@
 var React = require('React');
 
 var AppViewActionCreators = require('../actions/AppViewActionCreators');
+var RouteStore = require('../stores/RouteStore');
 var RouteListItem = require('./RouteListItem.react');
 
 
@@ -11,12 +12,14 @@ var RouteSection = React.createClass({
     },
 
     render() {
-        var routeIds = Object.keys(this.props.routes);
+        var routeIds = Object.keys(this.props.routes).map(Number);
 
         var routeListItems = routeIds.map((routeId) => {
             var route = this.props.routes[routeId];
+            var visible = RouteStore.isCurrent(routeId);
+
             return (
-                <RouteListItem route={route} key={'routelistitem:' + routeId} />
+                <RouteListItem route={route} key={'routelistitem:' + routeId} visible={visible} />
             );
         }, this);
 

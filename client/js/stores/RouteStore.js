@@ -3,6 +3,7 @@ var EventEmitter = require('events').EventEmitter;
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
+var GTFSUtils = require('../utils/GTFSUtils');
 
 var CHANGE_EVENT = 'change';
 
@@ -11,13 +12,18 @@ var _currentRouteIds = new Set([]);
 
 
 function _addRoutes(rawRoutes) {
-    rawRoutes.forEach(function(routeData) {
-        _routes[routeData.route_id] = routeData;
+    rawRoutes.forEach(function(rawRoute) {
+        var route = GTFSUtils.convertRawRoute(rawRoute);
+        _routes[route.routeId] = route;
     });
 }
 
 function _addCurrentRoute(routeId) {
     _currentRouteIds.add(routeId);
+}
+
+function _removeCurrentRoute(routeId) {
+    _currentRouteIds.delete(routeId);
 }
 
 
@@ -53,6 +59,10 @@ var RouteStore = assign({}, EventEmitter.prototype, {
     getAll() {
         return _routes;
     },
+
+    isCurrent(routeId) {
+        return _currentRouteIds.has(routeId);
+    }
 });
 
 
@@ -66,8 +76,13 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
             RouteStore.emitChange();
             break;
 
-        case AppConstants.ActionTypes.CLICK_ROUTE:
+        case AppConstants.ActionTypes.ROUTE_SHOW:
             _addCurrentRoute(action.routeId);
+            RouteStore.emitChange();
+            break;
+
+        case AppConstants.ActionTypes.ROUTE_HIDE:
+            _removeCurrentRoute(action.routeId);
             RouteStore.emitChange();
             break;
 

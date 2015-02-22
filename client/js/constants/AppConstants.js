@@ -1,7 +1,8 @@
 
 module.exports = {
     ActionTypes: {
-        CLICK_ROUTE: 'CLICK_ROUTE',
+        ROUTE_SHOW: 'ROUTE_SHOW',
+        ROUTE_HIDE: 'ROUTE_HIDE',
         RECEIVE_RAW_ROUTES: 'RECEIVE_RAW_ROUTES',
         RECEIVE_RAW_STOPS: 'RECEIVE_RAW_STOPS',
     },

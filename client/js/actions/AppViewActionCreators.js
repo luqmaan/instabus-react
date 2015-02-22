@@ -4,12 +4,19 @@ var GTFSWebAPIUtils = require('../utils/GTFSWebAPIUtils');
 
 
 module.exports = {
-    clickRoute(routeId) {
+    showRoute(routeId) {
         AppDispatcher.handleViewAction({
-            type: AppConstants.ActionTypes.CLICK_ROUTE,
+            type: AppConstants.ActionTypes.ROUTE_SHOW,
             routeId: routeId
         });
 
         GTFSWebAPIUtils.getStopsForRoute(routeId);
+    },
+
+    hideRoute(routeId) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.ROUTE_HIDE,
+            routeId: routeId
+        });
     }
 };
