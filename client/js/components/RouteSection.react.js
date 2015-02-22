@@ -2,6 +2,10 @@ var React = require('React');
 
 var RouteSection = React.createClass({
 
+    propTypes: {
+        routes: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    },
+
     render() {
         var routes = this.props.routes.map((route) => {
             return (

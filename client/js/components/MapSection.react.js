@@ -10,7 +10,7 @@ var MapSection = React.createClass({
             return (
                 <Polyline
                     positions={positions}
-                    key={'polyline:' + this.props.routeId + ':' + index} />
+                    key={'polyline:' + index} />
             );
         }, this);
 
@@ -18,7 +18,7 @@ var MapSection = React.createClass({
             return (
                 <CircleMarker
                     center={{lat: stop.stop_lat, lng: stop.stop_lon}}
-                    key={'stop:' + this.props.routeId + ':' + stop.direction_id + ':' + stop.stop_id}>
+                    key={'stop:' + stop.direction_id + ':' + stop.stop_id}>
                     <Popup>
                         <span>{stop.stop_name}</span>
                     </Popup>
