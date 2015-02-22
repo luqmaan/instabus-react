@@ -1,16 +1,19 @@
 var React = require('React');
 
+
 var RouteSection = React.createClass({
 
     propTypes: {
-        routes: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        routes: React.PropTypes.objectOf(React.PropTypes.object).isRequired,
     },
 
     render() {
-        var routes = this.props.routes.map((route) => {
+        var routeIds = Object.keys(this.props.routes);
+        var routes = routeIds.map((routeId) => {
+            var route = this.props.routes[routeId];
             return (
-                <li key={route.route_id} onClick={this.props.onRouteSelected.bind(null, route.route_id)}>
-                    <span>{route.route_id}</span>
+                <li key={routeId} onClick={this.props.onRouteSelected.bind(null, routeId)}>
+                    <span>{routeId}</span>
                     <span>{route.name}</span>
                 </li>
             );

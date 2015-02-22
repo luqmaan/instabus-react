@@ -1,8 +1,10 @@
-var React = require('react');
-window.React = React; // export for http://fb.me/react-devtools
-
+var React = window.React = require('react');
 var App = require('./components/App.react');
+var GTFSWebAPIUtils = require('./utils/GTFSWebAPIUtils');
 
-var allRoutes = require('../data/routes.json');
+
+GTFSWebAPIUtils.getAllRoutes();
 
 React.render(<App />, document.getElementById('app'));
+
+var RouteStore = window.RouteStore = require('./stores/RouteStore');
