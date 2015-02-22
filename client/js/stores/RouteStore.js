@@ -1,5 +1,4 @@
 var assign = require('object-assign');
-var Set = require('es6-set');
 var EventEmitter = require('events').EventEmitter;
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
