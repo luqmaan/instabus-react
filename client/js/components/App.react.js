@@ -26,7 +26,6 @@ var App = React.createClass({
     },
 
     _onChange() {
-        console.log('onchange')
         this.setState(getStateFromStores());
     },
 

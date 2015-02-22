@@ -9,7 +9,6 @@ var CHANGE_EVENT = 'change';
 
 var _stops = {};
 
-
 function _addStops(routeId, rawStops) {
     _stops[routeId] = rawStops;
 }
@@ -29,13 +28,15 @@ var StopStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrent() {
-        var stops = [];
+        var currentStops = {};
 
         for (var routeId of RouteStore.getCurrentRouteIds()) {
-            stops = stops.concat(_stops[routeId]);
+            (_stops[routeId] || []).forEach((stop) => {
+                currentStops[stop.stop_id] = stop;
+            });
         }
 
-        return stops;
+        return Object.keys(currentStops).map((key) => currentStops[key]);
     },
 
     getAll() {
