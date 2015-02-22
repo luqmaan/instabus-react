@@ -5,16 +5,13 @@ var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = Leaflet;
 
 var MapSection = React.createClass({
 
-    render() {
-        var polylinesList = this.props.polylines.map((positions, index) => {
-            return (
-                <Polyline
-                    positions={positions}
-                    key={'polyline:' + index} />
-            );
-        }, this);
+    propTypes: {
+        routes: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        stops: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    },
 
-        var stopsList = this.props.stops.map((stop, index) => {
+    render() {
+        var stopsList = this.props.stops.map((stop) => {
             return (
                 <CircleMarker
                     center={{lat: stop.stop_lat, lng: stop.stop_lon}}
@@ -26,28 +23,13 @@ var MapSection = React.createClass({
             );
         }, this);
 
-        var vehiclesList = this.props.vehicles.map((vehicle, index) => {
-            return (
-                <CircleMarker
-                    center={vehicle}
-                    key={'vehicle:' + vehicle.vId + ':' + index}
-                    className='vehicle-marker'>
-                    <Popup>
-                        <span>{vehicle.Routeid}</span>
-                    </Popup>
-                </CircleMarker>
-            );
-        });
-
         return (
             <Map center={this.props.initialPosition} zoom={13} id='map'>
                 <TileLayer
                     url='https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png'
                     attribution='<a href="http://openstreetmap.org">OpenStreetMap</a> | <a href="http://mapbox.com">Mapbox</a>'
                     id='drmaples.ipbindf8' />
-                {polylinesList}
                 {stopsList}
-                {vehiclesList}
             </Map>
         );
     },

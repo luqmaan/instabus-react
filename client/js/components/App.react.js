@@ -1,6 +1,7 @@
 var React = require('React');
 
 var RouteStore = require('../stores/RouteStore');
+var StopStore = require('../stores/StopStore');
 var RouteSection = require('./RouteSection.react');
 var ArrivalSection = require('./ArrivalSection.react');
 var MapSection = require('./MapSection.react');
@@ -13,7 +14,7 @@ function getStateFromStores() {
         polylines: [],
         vehicles: [],
         arrivals: [],
-        stops: [],
+        stops: StopStore.getCurrent(),
     };
 }
 
@@ -31,10 +32,12 @@ var App = React.createClass({
 
     componentDidMount() {
         RouteStore.addChangeListener(this._onChange);
+        StopStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
         RouteStore.removeChangeListener(this._onChange);
+        StopStore.removeChangeListener(this._onChange);
     },
 
     render() {
@@ -43,7 +46,7 @@ var App = React.createClass({
             return (
                 <div key={'visiblerouteheader:' + route.route_id}>{route.name}</div>
             );
-        })
+        });
 
         return (
             <div>
@@ -53,6 +56,11 @@ var App = React.createClass({
                     <h3>Visible Routes</h3>
                     {visibleRoutesSection}
                 </div>
+                <MapSection
+                    id="map-controller"
+                    initialPosition={[30.267153, -97.743061]}
+                    routes={this.state.currentRoutes}
+                    stops={this.state.stops} />
             </div>
         );
     }

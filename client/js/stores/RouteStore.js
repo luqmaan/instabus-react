@@ -38,6 +38,10 @@ var RouteStore = assign({}, EventEmitter.prototype, {
         return _routes[id];
     },
 
+    getCurrentRouteIds() {
+        return _currentRouteIds;
+    },
+
     getCurrent() {
         var currentRoutes = [];
         for (var routeId of _currentRouteIds) {

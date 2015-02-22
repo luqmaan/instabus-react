@@ -1,5 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
+var GTFSWebAPIUtils = require('../utils/GTFSWebAPIUtils');
 
 
 module.exports = {
@@ -8,5 +9,7 @@ module.exports = {
             type: AppConstants.ActionTypes.CLICK_ROUTE,
             routeId: routeId
         });
+
+        GTFSWebAPIUtils.getStopsForRoute(routeId);
     }
 };
