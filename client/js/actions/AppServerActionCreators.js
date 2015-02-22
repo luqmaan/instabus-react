@@ -24,5 +24,12 @@ module.exports = {
             routeId: routeId,
             rawPolylines: rawPolylines,
         });
-    }
+    },
+
+    receiveVehicles(rawVehicles) {
+        AppDispatcher.handleServerAction({
+            type: AppConstants.ActionTypes.RECEIVE_RAW_VEHICLES,
+            rawVehicles: rawVehicles,
+        });
+    },
 };

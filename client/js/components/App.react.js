@@ -3,6 +3,7 @@ var React = require('React');
 var RouteStore = require('../stores/RouteStore');
 var StopStore = require('../stores/StopStore');
 var PolylineStore = require('../stores/PolylineStore');
+var VehicleStore = require('../stores/VehicleStore');
 var RouteSection = require('./RouteSection.react');
 var ArrivalSection = require('./ArrivalSection.react');
 var MapSection = require('./MapSection.react');
@@ -14,7 +15,7 @@ function getStateFromStores() {
         routes: RouteStore.getAll(),
         stops: StopStore.getCurrent(),
         polylines: PolylineStore.getCurrent(),
-        vehicles: [],
+        vehicles: VehicleStore.getCurrent(),
         arrivals: [],
     };
 }
@@ -34,12 +35,14 @@ var App = React.createClass({
         RouteStore.addChangeListener(this._onChange);
         StopStore.addChangeListener(this._onChange);
         PolylineStore.addChangeListener(this._onChange);
+        VehicleStore.addChangeListener(this._onChange);
     },
 
     componentWillUnmount() {
         RouteStore.removeChangeListener(this._onChange);
         StopStore.removeChangeListener(this._onChange);
         PolylineStore.removeChangeListener(this._onChange);
+        VehicleStore.removeChangeListener(this._onChange);
     },
 
     render() {
@@ -54,7 +57,8 @@ var App = React.createClass({
                     initialPosition={[30.267153, -97.743061]}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
-                    poylines={this.state.polylines} />
+                    poylines={this.state.polylines}
+                    vehicles={this.state.vehicles} />
             </div>
         );
     }

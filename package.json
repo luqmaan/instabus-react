@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "leaflet": "^0.7.3",
-    "react-leaflet": "^0.3.0"
+    "react-leaflet": "^0.3.0",
+    "superagent": "^0.21.0"
   }
 }
