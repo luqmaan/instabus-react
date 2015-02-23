@@ -1,6 +1,11 @@
+var fs = require('fs');
 var React = require('react');
-var Leaflet = window.Leaflet = require('react-leaflet');
-var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = Leaflet;
+var Leaflet = require('leaflet');
+var ReactLeaflet = window.ReactLeaflet = require('react-leaflet');
+var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = ReactLeaflet;
+
+var AppConstants = require('../constants/AppConstants');
+
 
 function getStopMarker(stop) {
     return (
@@ -23,15 +28,21 @@ function getPolylineLayer(polyline) {
 }
 
 function getVehicleMarker(vehicle) {
+    var icon = Leaflet.divIcon({
+        className: 'vehicle-icon',
+        html: AppConstants.Icons.VEHICLE_ICON.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
+    });
+
     return (
-        <CircleMarker
-            center={vehicle.position}
+        <Marker
+            position={vehicle.position}
             key={'vehicle:' + vehicle.vehicleId}
-            className='vehicle-marker'>
+            className='vehicle-marker'
+            icon={icon}>
             <Popup>
                 <span>{vehicle.routeId}</span>
             </Popup>
-        </CircleMarker>
+        </Marker>
     );
 }
 
