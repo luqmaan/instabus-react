@@ -6,6 +6,7 @@ var TrapezeWebAPIUtils = require('./utils/TrapezeWebAPIUtils');
 
 GTFSWebAPIUtils.getAllRoutes();
 TrapezeWebAPIUtils.getAllVehicles();
+setInterval(TrapezeWebAPIUtils.getAllVehicles, 10000);
 
 React.render(<App />, document.getElementById('app'));
 

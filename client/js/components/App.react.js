@@ -22,7 +22,6 @@ function getStateFromStores() {
 
 
 var App = React.createClass({
-
     getInitialState() {
         return getStateFromStores();
     },

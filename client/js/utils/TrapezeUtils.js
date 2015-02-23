@@ -1,8 +1,8 @@
 function convertRawPositions(rawPositions) {
     var latest = rawPositions.Position[0].split(',');
     return {
-        lat: latest[0],
-        lng: latest[1],
+        lat: Number(latest[0]),
+        lng: Number(latest[1]),
     };
 }
 

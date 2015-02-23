@@ -9,14 +9,14 @@ var TrapezeUtils = require('../utils/TrapezeUtils');
 
 var CHANGE_EVENT = 'change';
 
-var _vehicles = [];
+var _vehicles = {};
 
 
 function _addVehicles(routeId, rawVehicles) {
     rawVehicles.forEach((rawVehicle) => {
         var vehicle = TrapezeUtils.convertRawVehicle(rawVehicle);
 
-        _vehicles.push(vehicle);
+        _vehicles[vehicle.vehicleId] = vehicle;
     });
 }
 
@@ -36,8 +36,9 @@ var VehicleStore = assign({}, EventEmitter.prototype, {
 
     getCurrent() {
         var routeIds = RouteStore.getCurrentRouteIds();
+        var vehiclesList = Object.keys(_vehicles).map((key) => _vehicles[key]);
 
-        return _vehicles.filter((vehicle) => {
+        return vehiclesList.filter((vehicle) => {
             return routeIds.indexOf(vehicle.routeId) !== -1;
         });
     },
