@@ -1,8 +1,8 @@
 var React = require("react");
 var Leaflet = require("leaflet");
-
 var latlngType = require("react-leaflet").PropTypes.latlng;
 var popupContainerMixin = require("react-leaflet").mixins.popupContainer;
+require('leaflet.label');
 
 function easeInOutCubic(t, b, c, d) {
     if ((t/=d/2) < 1) return c/2*t*t*t + b;
@@ -20,19 +20,31 @@ function animateMarker(marker, i, steps, startLatLng, deltaLatLng) {
     }
 }
 
+
+// Based on https://github.com/PaulLeCam/react-leaflet/blob/ba19dfc3db363b3b38a1d4131186d9168efc9504/src/Marker.js
 module.exports = React.createClass({
-  displayName: "AnimatedMarker",
+  displayName: "VehicleMarker",
 
   mixins: [popupContainerMixin],
 
   propTypes: {
     position: latlngType.isRequired,
     animateSteps: React.PropTypes.number.isRequired,
+    label: React.PropTypes.string,
   },
 
   componentWillMount() {
     var {map, position, ...props} = this.props;
     this._leafletElement = Leaflet.marker(position, props);
+
+    if (this.props.label) {
+        this._leafletElement.bindLabel(this.props.label, {
+            noHide: true,
+            direction: 'left',
+            className: 'vehicle-leaflet-label',
+            offset: [25, -10],
+       });
+    }
   },
 
   componentDidUpdate(prevProps) {

@@ -1,4 +1,5 @@
 @import "leaflet";
+@import "leaflet.label";
 
 * {
     -webkit-user-select: none;
@@ -23,4 +24,26 @@ body {
 .vehicle-icon {
     margin-left: -20px !important;
     margin-top: -20px !important;
+}
+.vehicle-leaflet-label {
+    border: 1px solid rgb(225,225,225);
+    color: rgb(75, 122, 169);
+    background: rgba(255, 255, 255, 0.9);
+    font-family: 'Trebuchet MS', Verdana, Arial, sans-serif;
+    font-weight: 600;
+}
+.vehicle-leaflet-label::before, .vehicle-leaflet-label::after {
+    content: normal;
+}
+
+.stop-leaflet-label {
+    background: none;
+    border: none;
+    font-weight: 600;
+    font-family: 'Trebuchet MS', Verdana, Arial, sans-serif;
+    color: rgb(110, 96, 101);
+    text-shadow: rgb(255,255,255) 1px 2px 0px;
+}
+.stop-leaflet-label::before, .stop-leaflet-label::after {
+    content: normal;
 }

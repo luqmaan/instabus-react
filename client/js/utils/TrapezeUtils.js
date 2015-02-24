@@ -13,6 +13,7 @@ module.exports = {
             vehicleId: Number(rawVehicle.Vehicleid),
             heading: Number(rawVehicle.Heading) * 10,
             position: convertRawPositions(rawVehicle.Positions),
+            updateTime: rawVehicle.Updatetime
         };
     },
 };
