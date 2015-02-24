@@ -13,8 +13,6 @@ function animateMarker(marker, i, steps, startLatLng, deltaLatLng) {
     var x = easeInOutCubic(i, startLatLng[0], deltaLatLng[0], steps),
         y = easeInOutCubic(i, startLatLng[1], deltaLatLng[1], steps);
 
-    console.log('setLatLng', x, y)
-
     marker.setLatLng([x, y]);
 
     if (i < steps) {
@@ -28,7 +26,8 @@ module.exports = React.createClass({
   mixins: [popupContainerMixin],
 
   propTypes: {
-    position: latlngType.isRequired
+    position: latlngType.isRequired,
+    animateSteps: React.PropTypes.number.isRequired,
   },
 
   componentWillMount() {
@@ -39,12 +38,8 @@ module.exports = React.createClass({
   componentDidUpdate(prevProps) {
     if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
         var marker = this.getLeafletElement();
-        // marker.setLatLng.setLatLng(this.props.position);
-        console.log('animating props from', prevProps.position, 'to', this.props.position)
-
         var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
-        var steps = 100;
-        animateMarker(marker, 0, steps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
+        animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
     }
   }
 });
