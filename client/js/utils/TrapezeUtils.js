@@ -11,7 +11,7 @@ module.exports = {
         return {
             routeId: Number(rawVehicle.Route),
             vehicleId: Number(rawVehicle.Vehicleid),
-            heading: Number(rawVehicle.Heading),
+            heading: Number(rawVehicle.Heading) * 10,
             position: convertRawPositions(rawVehicle.Positions),
         };
     },

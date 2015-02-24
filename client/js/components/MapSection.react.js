@@ -5,6 +5,7 @@ var ReactLeaflet = window.ReactLeaflet = require('react-leaflet');
 var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = ReactLeaflet;
 
 var AppConstants = require('../constants/AppConstants');
+var AnimatedMarker = require('./Leaflet.AnimatedMarker.react');
 
 
 function getStopMarker(stop) {
@@ -34,7 +35,7 @@ function getVehicleMarker(vehicle) {
     });
 
     return (
-        <Marker
+        <AnimatedMarker
             position={vehicle.position}
             key={'vehicle:' + vehicle.vehicleId}
             className='vehicle-marker'
@@ -42,7 +43,7 @@ function getVehicleMarker(vehicle) {
             <Popup>
                 <span>{vehicle.routeId}</span>
             </Popup>
-        </Marker>
+        </AnimatedMarker>
     );
 }
 
