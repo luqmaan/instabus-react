@@ -1,13 +1,13 @@
-var React = require('React');
+var React = require('react');
 
 var RouteStore = require('../stores/RouteStore');
 var StopStore = require('../stores/StopStore');
 var PolylineStore = require('../stores/PolylineStore');
 var VehicleStore = require('../stores/VehicleStore');
-var RouteSection = require('./RouteSection.react');
-var ArrivalSection = require('./ArrivalSection.react');
-var MapSection = require('./MapSection.react');
-
+var RouteSection = require('./RouteSection.react.jsx');
+var ArrivalSection = require('./ArrivalSection.react.jsx');
+var MapSection = require('./MapSection.react.jsx');
+var NavBar = require('./NavBar.react.jsx');
 
 function getStateFromStores() {
     return {
@@ -45,19 +45,36 @@ var App = React.createClass({
     },
 
     render() {
-        return (
-            <div>
-                <h3>All Routes</h3>
-                <RouteSection
-                    routes={this.state.routes}
-                    currentRoutes={this.state.currentRoutes} />
+        var mapSection;
+        var routeSection;
+
+        if (this.state.currentRoutes.length) {
+            mapSection = (
                 <MapSection
-                    id="map-controller"
+                    id='map-controller'
                     initialPosition={[30.267153, -97.743061]}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
                     poylines={this.state.polylines}
                     vehicles={this.state.vehicles} />
+            );
+        }
+        else {
+            routeSection = (
+                <RouteSection
+                    routes={this.state.routes}
+                    currentRoutes={this.state.currentRoutes} />
+            );
+
+        }
+        return (
+            <div className='app-wrapper'>
+                <NavBar currentRoutes={this.state.currentRoutes} />
+                <div className='content'>
+                    <h3>All Routes</h3>
+                    {routeSection}
+                </div>
+                {mapSection}
             </div>
         );
     }

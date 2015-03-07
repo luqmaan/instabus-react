@@ -5,7 +5,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var RouteStore = require('../stores/RouteStore');
 var GTFSUtils = require('../utils/GTFSUtils');
-var TrapezeUtils = require('../utils/TrapezeUtils');
+var SocrataUtils = require('../utils/SocrataUtils');
 
 var CHANGE_EVENT = 'change';
 
@@ -14,7 +14,7 @@ var _vehicles = {};
 
 function _addVehicles(routeId, rawVehicles) {
     rawVehicles.forEach((rawVehicle) => {
-        var vehicle = TrapezeUtils.convertRawVehicle(rawVehicle);
+        var vehicle = SocrataUtils.convertRawVehicle(rawVehicle);
 
         _vehicles[vehicle.vehicleId] = vehicle;
     });

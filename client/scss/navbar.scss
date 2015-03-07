@@ -1,0 +1,45 @@
+.navbar {
+    width: 100vw;
+    color: rgb(255, 255, 255);
+    padding: 0 0;
+    background: rgb(207,30,30);
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14),0 4px 8px rgba(0, 0, 0, 0.28);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+
+    a.logo {
+        flex: 1;
+        align-items: center;
+        display: flex;
+    }
+
+    a {
+        color: rgb(255, 255, 255);
+        border: none;
+        text-decoration: none;
+    }
+
+    h1 {
+        font-weight: 300;
+        font-size: 1.5em;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.unicon {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    svg {
+        padding-top: 4px;
+        padding-left: 5px;
+        g {
+            fill: rgba(255, 255, 255, 0.9);
+        }
+    }
+}

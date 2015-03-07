@@ -5,8 +5,8 @@ var ReactLeaflet = window.ReactLeaflet = require('react-leaflet');
 var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = ReactLeaflet;
 
 var AppConstants = require('../constants/AppConstants');
-var VehicleMarker = require('./VehicleMarker.react');
-var StopMarker = require('./StopMarker.react');
+var VehicleMarker = require('./VehicleMarker.react.jsx');
+var StopMarker = require('./StopMarker.react.jsx');
 
 
 function getStopMarker(stop) {

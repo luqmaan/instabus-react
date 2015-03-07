@@ -1,8 +1,8 @@
-var React = require('React');
+var React = require('react');
 
 var AppViewActionCreators = require('../actions/AppViewActionCreators');
 var RouteStore = require('../stores/RouteStore');
-var RouteListItem = require('./RouteListItem.react');
+var RouteListItem = require('./RouteListItem.react.jsx');
 
 
 var RouteSection = React.createClass({

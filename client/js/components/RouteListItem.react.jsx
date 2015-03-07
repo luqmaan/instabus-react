@@ -1,4 +1,4 @@
-var React = require('React');
+var React = require('react');
 var AppViewActionCreators = require('../actions/AppViewActionCreators');
 
 
@@ -11,17 +11,26 @@ var RouteSection = React.createClass({
 
     render() {
         return (
-            <li onClick={this._onClick}>
-                {this.props.visible ? 'Hide' : 'Show'} {this.props.route.routeId} {this.props.route.name}
+            <li>
+                <div onClick={this._onClick}>
+                    {this.props.visible ? 'Hide' : 'Show'} {this.props.route.routeId} {this.props.route.name}
+                </div>
+                <input type="checkbox" onClick={this._onCheck} />
             </li>
         );
     },
 
     _onClick() {
-        if (this.props.visible)
+        if (this.props.visible) {
             AppViewActionCreators.hideRoute(this.props.route.routeId);
-        else
+        }
+        else {
             AppViewActionCreators.showRoute(this.props.route.routeId);
+        }
+    },
+
+    _onCheck() {
+        console.log('ON Check')
     }
 
 });
