@@ -10,6 +10,7 @@ var StopMarker = require('./StopMarker.react.jsx');
 
 
 function getStopMarker(stop) {
+    if (!stop) return;
     return (
         <StopMarker
             center={{lat: stop.stop_lat, lng: stop.stop_lon}}
@@ -40,6 +41,7 @@ function getPolylineLayer(polyline) {
 }
 
 function getVehicleMarker(vehicle) {
+    if (!vehicle) return;
     var icon = Leaflet.divIcon({
         className: 'vehicle-icon',
         html: AppConstants.Icons.VEHICLE_ICON.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')

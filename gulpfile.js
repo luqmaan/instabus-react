@@ -21,7 +21,7 @@ var reactify = require('reactify');
 var ROOT = __dirname + '/build';
 
 var reactifyES6 = function(file) {
-  return reactify(file, {es6: true});
+  return reactify(file, {es6: true, target: 'es5'});
 };
 
 // https://github.com/gulpjs/gulp/blob/master/docs/recipes/fast-browserify-builds-with-watchify.md
@@ -41,35 +41,41 @@ gulp.task('browserify', function() {
 
     return watcher.on('update', function() {
             var updateStart = Date.now();
-            console.log('Updating!');
             watcher.bundle()
                 .pipe(source('main.js'))
                 .pipe(gulp.dest('./build/js/'))
+                .pipe(gprint())
                 .pipe(connect.reload());
-            console.log('Updated!', (Date.now() - updateStart) + 'ms');
         })
         .bundle()
         .pipe(source('main.js'))
-        .pipe(gprint())
-        .pipe(gulp.dest('./build/js/'));
+        .pipe(gulp.dest('./build/js/'))
+        .pipe(gprint());
 });
 
 gulp.task('clean', function () {
     return gulp.src('build/', {read: false})
-    .pipe(clean());
+        .pipe(clean());
 });
 
 gulp.task('styles', function () {
+    var postcss = require('gulp-postcss');
+    var sourcemaps = require('gulp-sourcemaps');
+    var autoprefixer = require('autoprefixer-core');
+    var autoprefix = autoprefixer({browsers: ['last 2 version']});
+
     gulp.src('client/scss/main.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('build/css/'))
-    .pipe(gprint())
-    .pipe(connect.reload());
+        .pipe(sass())
+        .pipe(postcss([autoprefix]))
+        .pipe(gulp.dest('build/css/'))
+        .pipe(gprint())
+        .pipe(connect.reload());
 });
 
 gulp.task('copy', function(){
     gulp.src('client/*.html')
-    .pipe(gulp.dest('build/'));
+        .pipe(gulp.dest('build/'))
+        .pipe(gprint());
 });
 
 gulp.task('watch', function() {

@@ -47,11 +47,12 @@ var App = React.createClass({
     render() {
         var mapSection;
         var routeSection;
+        console.log('lol', this.state.currentRoutes, this.state.currentRoutes.length)
 
         if (this.state.currentRoutes.length) {
             mapSection = (
                 <MapSection
-                    id='map-controller'
+                    id='map-wrapper'
                     initialPosition={[30.267153, -97.743061]}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
@@ -60,20 +61,18 @@ var App = React.createClass({
             );
         }
         else {
+            console.log('showing all routes')
             routeSection = (
-                <RouteSection
-                    routes={this.state.routes}
-                    currentRoutes={this.state.currentRoutes} />
+                <div className='content'>
+                    <RouteSection routes={this.state.routes} />
+                </div>
             );
 
         }
         return (
             <div className='app-wrapper'>
                 <NavBar currentRoutes={this.state.currentRoutes} />
-                <div className='content'>
-                    <h3>All Routes</h3>
                     {routeSection}
-                </div>
                 {mapSection}
             </div>
         );

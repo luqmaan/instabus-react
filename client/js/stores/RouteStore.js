@@ -8,7 +8,7 @@ var GTFSUtils = require('../utils/GTFSUtils');
 var CHANGE_EVENT = 'change';
 
 var _routes = {};
-var _currentRouteIds = new Set([]);
+var _currentRouteIds = new Set();
 
 
 function _addRoutes(rawRoutes) {
@@ -52,9 +52,11 @@ var RouteStore = assign({}, EventEmitter.prototype, {
 
     getCurrent() {
         var currentRoutes = [];
-        for (var routeId of _currentRouteIds) {
-            currentRoutes.push(this.get(routeId));
-        }
+
+        _currentRouteIds.forEach((routeId) => {
+            currentRoutes.push(_routes[routeId]);
+        });
+
         return currentRoutes;
     },
 

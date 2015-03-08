@@ -7,6 +7,7 @@
   "author": "Fizer Khan",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer-core": "^5.1.7",
     "browserify": "^9.0.3",
     "envify": "~1.2.1",
     "gulp": "~3.8.1",
@@ -14,6 +15,7 @@
     "gulp-concat": "~2.1.7",
     "gulp-connect": "~2.0.5",
     "gulp-imagemin": "~0.1.4",
+    "gulp-postcss": "^4.0.3",
     "gulp-print": "^1.1.0",
     "gulp-sass": "*",
     "gulp-sourcemaps": "^1.5.0",

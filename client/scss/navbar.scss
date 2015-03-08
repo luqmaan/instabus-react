@@ -1,45 +1,56 @@
 .navbar {
-    width: 100vw;
     color: rgb(255, 255, 255);
-    padding: 0 0;
     background: rgb(207,30,30);
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14),0 4px 8px rgba(0, 0, 0, 0.28);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
     padding: 5px;
-    box-sizing: border-box;
+    height: 55px;
+    font-size: 1.4em;
+    font-weight: 300;
+    padding-right: 20px;
+    padding-left: 10px;
 
-    a.logo {
+    .logo {
         flex: 1;
-        align-items: center;
         display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        h1 {
+            font-weight: 300;
+            transition: color 200ms ease-in-out;
+            font-size: 1.1em;
+        }
     }
 
     a {
-        color: rgb(255, 255, 255);
+        color: rgba(255, 255, 255, 0.9);
         border: none;
         text-decoration: none;
+        transition: color 200ms ease-in-out;
+        &:hover {
+            color: rgba(255, 255, 255, 1);
+        }
     }
 
-    h1 {
-        font-weight: 300;
-        font-size: 1.5em;
+    .unicon {
+        width: 44px;
+        height: 44px;
         margin: 0;
         padding: 0;
+        margin-top: 10px;
+        cursor: pointer;
+        display: flex;
+        svg {
+            * {
+                transition: fill 200ms ease-in-out;
+                fill: rgba(255, 255, 255, 0.9);
+            }
+        }
     }
 }
 
-.unicon {
-    width: 35px;
-    height: 35px;
-    cursor: pointer;
-    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
-    svg {
-        padding-top: 4px;
-        padding-left: 5px;
-        g {
-            fill: rgba(255, 255, 255, 0.9);
-        }
-    }
+.logo:hover h1 {
+    color: rgba(255, 255, 255, 1);
+}
+.logo:hover .unicon svg * {
+    fill: rgba(255, 255, 255, 1);
 }

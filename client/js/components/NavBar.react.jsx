@@ -1,7 +1,7 @@
 var React = require('react');
 
 var municornSvg = `
-<svg width="33px" height="33px" viewBox="0 0 33 33">
+<svg width="44px" height="44px" viewBox="0 0 44 44">
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(3.000000, 1.000000)" id="Artboard-1" fill="#CF1E1E">
             <g>
@@ -29,7 +29,7 @@ var NavBar = React.createClass({
     render() {
         return (
             <div className="navbar">
-                <a className="logo">
+                <a href="/" className="logo">
                     <span className="unicon" dangerouslySetInnerHTML={{__html: municornSvg}} />
                     <h1>Instabus</h1>
                 </a>

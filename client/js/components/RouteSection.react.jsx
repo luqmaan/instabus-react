@@ -16,10 +16,9 @@ var RouteSection = React.createClass({
 
         var routeListItems = routeIds.map((routeId) => {
             var route = this.props.routes[routeId];
-            var visible = RouteStore.isCurrent(routeId);
 
             return (
-                <RouteListItem route={route} key={'routelistitem:' + routeId} visible={visible} />
+                <RouteListItem route={route} key={'routelistitem:' + routeId} />
             );
         }, this);
 
