@@ -86,8 +86,9 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
     connect.server({
         livereload: true,
+        root: 'build',
+        host: '0.0.0.0',
         port: 1234,
-        root: 'build'
     });
 });
 

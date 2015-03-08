@@ -74,15 +74,17 @@ var MapSection = React.createClass({
         var vehicleLayers = this.props.vehicles.map(getVehicleMarker);
 
         return (
-            <Map center={this.props.initialPosition} zoom={13} id='map'>
-                <TileLayer
-                    url='https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png'
-                    attribution='<a href="http://openstreetmap.org">OpenStreetMap</a> | <a href="http://mapbox.com">Mapbox</a>'
-                    id='drmaples.ipbindf8' />
-                {polylineLayers}
-                {stopLayers}
-                {vehicleLayers}
-            </Map>
+            <div id='map-wrapper'>
+                <Map center={this.props.initialPosition} zoom={13} id='map'>
+                    <TileLayer
+                        url='https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png'
+                        attribution='<a href="http://openstreetmap.org">OpenStreetMap</a> | <a href="http://mapbox.com">Mapbox</a>'
+                        id='drmaples.ipbindf8' />
+                    {polylineLayers}
+                    {stopLayers}
+                    {vehicleLayers}
+                </Map>
+            </div>
         );
     },
 

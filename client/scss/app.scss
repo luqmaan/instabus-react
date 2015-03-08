@@ -21,6 +21,8 @@ body {
     display: flex;
     width: 100vw;
     height: 100vh;
+    max-height: 100%;
+    overflow: hidden;
 }
 .app-wrapper {
     display: flex;
@@ -71,6 +73,7 @@ body {
         }
     }
     .checkbox {
+        display: flex;
         cursor: pointer;
         color: #ddd;
         svg path:nth-child(2) {
@@ -96,9 +99,13 @@ body {
     flex: 1;
 }
 #map-wrapper {
-    display: flex;
-    flex: 1;
+    position: absolute;
+    width: 100%;
+    top: 60px;
+    margin-top: 0;
+    bottom: 0;
 }
 #map {
-    position: static !important;
+    position: relative;
+    height: 100%;
 }
