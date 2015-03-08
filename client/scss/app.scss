@@ -24,6 +24,11 @@ body {
     max-height: 100%;
     overflow: hidden;
 }
+.content-wrapper, .navbar {
+    button:focus {
+        outline: 0;
+    }
+}
 .app-wrapper {
     display: flex;
     flex-direction: column;
@@ -42,9 +47,29 @@ body {
     .content {
         flex: 1;
     }
+
 }
 .list-header-view {
     padding: 0 0 5px 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h3 {
+        font-weight: 400;
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        color: rgb(155, 155, 155);
+        font-size: 1em;
+    }
+    button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        svg path:nth-child(2) {
+            fill: rgb(155, 155, 155);
+        }
+    }
 }
 .list-view {
     box-shadow: 0 2px 3px rgb(208,208,208);
@@ -88,9 +113,6 @@ body {
         }
         &.checked svg path:nth-child(2) {
             fill: rgba(0, 0, 0, 0.5);
-        }
-        &:focus {
-            outline: 0;
         }
     }
 }

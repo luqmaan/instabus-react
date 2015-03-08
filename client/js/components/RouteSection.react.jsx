@@ -18,7 +18,7 @@ function getRouteListItems(routes) {
                 route={route}
                 key={'routelistitem:' + routeId} />
         );
-    }, this);
+    });
 }
 
 var RouteSection = React.createClass({
@@ -27,12 +27,26 @@ var RouteSection = React.createClass({
         routes: React.PropTypes.objectOf(React.PropTypes.object).isRequired,
     },
 
+    checkRoutes() {
+        AppViewActionCreators.checkRoutes(
+            Object.keys(this.props.routes).map(Number)
+        );
+    },
+
     render() {
         var routeListItems = getRouteListItems(this.props.routes);
 
         return (
             <div className='content'>
-                <div className='list-header-view'>All Routes</div>
+                <div className='list-header-view'>
+                    <h3>All Routes</h3>
+                    <button onClick={this.checkRoutes}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24h-24z" fill="none"/>
+                            <path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41 6.34-6.34zm4.24-1.41l-10.58 10.58-4.18-4.17-1.41 1.41 5.59 5.59 12-12-1.42-1.41zm-21.83 7.82l5.59 5.59 1.41-1.41-5.58-5.59-1.42 1.41z"/>
+                        </svg>
+                    </button>
+                </div>
                 <div className='list-view'>
                     <ul>{routeListItems}</ul>
                 </div>
