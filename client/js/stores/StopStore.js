@@ -30,7 +30,7 @@ var StopStore = assign({}, EventEmitter.prototype, {
     getCurrent() {
         var currentStops = {};
 
-        RouteStore.getCurrentRouteIds().map((routeId) => {
+        RouteStore.getCurrentIds().map((routeId) => {
             var stopsForRoute = _stops[routeId] || [];
             stopsForRoute.forEach((stop) => {
                 currentStops[stop.stop_id] = stop;

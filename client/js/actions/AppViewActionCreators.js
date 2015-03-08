@@ -19,5 +19,27 @@ module.exports = {
             type: AppConstants.ActionTypes.ROUTE_HIDE,
             routeId: routeId,
         });
+    },
+
+    checkRoute(routeId) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.ROUTE_CHECK,
+            routeId: routeId,
+        });
+    },
+
+    uncheckRoute(routeId) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.ROUTE_UNCHECK,
+            routeId: routeId,
+        });
+    },
+
+    resetCheckedRoutes(routeIds) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.ROUTE_RESET_CHECKED,
+        });
+
+        routeIds.forEach(this.showRoute);
     }
 };

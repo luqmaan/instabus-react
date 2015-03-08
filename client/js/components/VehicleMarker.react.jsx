@@ -23,7 +23,7 @@ function animateMarker(marker, i, steps, startLatLng, deltaLatLng) {
 
 // Based on https://github.com/PaulLeCam/react-leaflet/blob/ba19dfc3db363b3b38a1d4131186d9168efc9504/src/Marker.js
 module.exports = React.createClass({
-  displayName: "VehicleMarker",
+  displayName: 'VehicleMarker',
 
   mixins: [popupContainerMixin],
 

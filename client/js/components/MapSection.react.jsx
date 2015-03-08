@@ -44,7 +44,7 @@ function getVehicleMarker(vehicle) {
     if (!vehicle) return;
     var icon = Leaflet.divIcon({
         className: 'vehicle-icon',
-        html: AppConstants.Icons.VEHICLE_ICON.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
+        html: AppConstants.Icons.VEHICLE.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
     });
 
     return (

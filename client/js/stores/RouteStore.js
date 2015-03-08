@@ -9,6 +9,7 @@ var CHANGE_EVENT = 'change';
 
 var _routes = {};
 var _currentRouteIds = new Set();
+var _checkedRouteIds = new Set();
 
 
 function _addRoutes(rawRoutes) {
@@ -26,6 +27,24 @@ function _removeCurrentRoute(routeId) {
     _currentRouteIds.delete(routeId);
 }
 
+function _addCheckedRoute(routeId) {
+    _checkedRouteIds.add(routeId);
+}
+
+function _removeCheckedRoute(routeId) {
+    _checkedRouteIds.delete(routeId);
+}
+
+function _resetCheckedRoutes() {
+    _checkedRouteIds.clear();
+}
+
+function _currentRoutesFromCheckedRoutes() {
+    _currentRouteIds.clear();
+    _checkedRouteIds.forEach((routeId) => {
+        _currentRouteIds.add(routeId);
+    });
+}
 
 var RouteStore = assign({}, EventEmitter.prototype, {
     emitChange() {
@@ -44,7 +63,7 @@ var RouteStore = assign({}, EventEmitter.prototype, {
         return _routes[id];
     },
 
-    getCurrentRouteIds() {
+    getCurrentIds() {
         var ids = [];
         _currentRouteIds.forEach((id) => ids.push(id));
         return ids;
@@ -60,13 +79,30 @@ var RouteStore = assign({}, EventEmitter.prototype, {
         return currentRoutes;
     },
 
+    getCheckedIds() {
+        var ids = [];
+        _checkedRouteIds.forEach((id) => ids.push(id));
+        return ids;
+    },
+
+    getChecked() {
+        var checkedRoutes = [];
+
+        _checkedRouteIds.forEach((routeId) => {
+            checkedRoutes.push(_routes[routeId]);
+        });
+
+        return checkedRoutes;
+    },
+
+    isChecked(routeId) {
+        return _checkedRouteIds.has(routeId);
+    },
+
     getAll() {
         return _routes;
     },
 
-    isCurrent(routeId) {
-        return _currentRouteIds.has(routeId);
-    },
 });
 
 
@@ -87,6 +123,21 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
 
         case AppConstants.ActionTypes.ROUTE_HIDE:
             _removeCurrentRoute(action.routeId);
+            RouteStore.emitChange();
+            break;
+
+        case AppConstants.ActionTypes.ROUTE_CHECK:
+            _addCheckedRoute(action.routeId);
+            RouteStore.emitChange();
+            break;
+
+        case AppConstants.ActionTypes.ROUTE_UNCHECK:
+            _removeCheckedRoute(action.routeId);
+            RouteStore.emitChange();
+            break;
+
+        case AppConstants.ActionTypes.ROUTE_RESET_CHECKED:
+            _resetCheckedRoutes();
             RouteStore.emitChange();
             break;
 

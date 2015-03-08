@@ -35,7 +35,7 @@ var VehicleStore = assign({}, EventEmitter.prototype, {
     },
 
     getCurrent() {
-        var routeIds = RouteStore.getCurrentRouteIds();
+        var routeIds = RouteStore.getCurrentIds();
         var vehiclesList = Object.keys(_vehicles).map((key) => _vehicles[key]);
 
         return vehiclesList.filter((vehicle) => {

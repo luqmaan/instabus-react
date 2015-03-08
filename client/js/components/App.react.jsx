@@ -12,6 +12,8 @@ var NavBar = require('./NavBar.react.jsx');
 function getStateFromStores() {
     return {
         currentRoutes: RouteStore.getCurrent(),
+        checkedRoutes: RouteStore.getChecked(),
+        checkedRouteIds: RouteStore.getCheckedIds(),
         routes: RouteStore.getAll(),
         stops: StopStore.getCurrent(),
         polylines: PolylineStore.getCurrent(),
@@ -47,6 +49,7 @@ var App = React.createClass({
     render() {
         var mapSection;
         var routeSection;
+
         if (this.state.currentRoutes.length) {
             mapSection = (
                 <MapSection
@@ -58,18 +61,20 @@ var App = React.createClass({
             );
         }
         else {
-            console.log('showing all routes')
             routeSection = (
-                <div className='content'>
-                    <RouteSection routes={this.state.routes} />
+                <div className='content-wrapper'>
+                    <RouteSection
+                        routes={this.state.routes} />
                 </div>
             );
 
         }
         return (
             <div className='app-wrapper'>
-                <NavBar currentRoutes={this.state.currentRoutes} />
-                    {routeSection}
+                <NavBar
+                    currentRoutes={this.state.currentRoutes}
+                    checkedRouteIds={this.state.checkedRouteIds} />
+                {routeSection}
                 {mapSection}
             </div>
         );

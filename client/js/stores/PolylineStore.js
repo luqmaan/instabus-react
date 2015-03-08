@@ -32,11 +32,9 @@ var PolylineStore = assign({}, EventEmitter.prototype, {
 
     getCurrent() {
         var currentPolylines = [];
-
-        RouteStore.getCurrentRouteIds().map(
+        RouteStore.getCurrentIds().map(
             (routeId) => currentPolylines.push(_polylines[routeId])
         );
-
         return currentPolylines;
     },
 
@@ -63,5 +61,7 @@ PolylineStore.dispatchToken = AppDispatcher.register((payload) => {
             // po op
     }
 });
+
+PolylineStore._ = _polylines;
 
 module.exports = PolylineStore;
