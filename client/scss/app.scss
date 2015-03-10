@@ -69,6 +69,11 @@ body {
         svg path:nth-child(2) {
             fill: rgb(155, 155, 155);
         }
+        &.checked {
+            svg path:nth-child(2) {
+                fill: rgb(135, 135, 135);
+            }
+        }
     }
 }
 .list-view {
@@ -111,8 +116,10 @@ body {
             fill: rgba(0, 0, 0, 0.1);
             transition: fill 100ms ease-in-out;
         }
-        &.checked svg path:nth-child(2) {
-            fill: rgba(0, 0, 0, 0.5);
+        &.checked, &:hover {
+            svg path:nth-child(2) {
+                fill: rgba(0, 0, 0, 0.5);
+            }
         }
     }
 }
