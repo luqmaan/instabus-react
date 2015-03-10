@@ -28,10 +28,6 @@ module.exports = {
         });
     },
 
-    checkRoutes(routeIds) {
-        routeIds.forEach(this.checkRoute);
-    },
-
     uncheckRoute(routeId) {
         AppDispatcher.handleViewAction({
             type: AppConstants.ActionTypes.ROUTE_UNCHECK,

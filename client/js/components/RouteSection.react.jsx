@@ -28,9 +28,18 @@ var RouteSection = React.createClass({
     },
 
     checkRoutes() {
-        AppViewActionCreators.checkRoutes(
-            Object.keys(this.props.routes).map(Number)
-        );
+        var routeIds = Object.keys(this.props.routes).map(Number);
+
+        var containsUncheckedRoutes = routeIds.map((routeId) => {
+            return RouteStore.isChecked(routeId);
+        });
+
+        if (containsUncheckedRoutes.indexOf(false) !==-1) {
+            AppViewActionCreators.checkRoute(routeIds);
+        }
+        else {
+            AppViewActionCreators.uncheckRoute(routeIds);
+        }
     },
 
     render() {

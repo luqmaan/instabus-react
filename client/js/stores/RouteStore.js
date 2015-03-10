@@ -28,11 +28,21 @@ function _removeCurrentRoute(routeId) {
 }
 
 function _addCheckedRoute(routeId) {
-    _checkedRouteIds.add(routeId);
+    if (!Array.isArray(routeId)) {
+        routeId = [routeId];
+    }
+    routeId.forEach((id) => {
+        _checkedRouteIds.add(id);
+    });
 }
 
 function _removeCheckedRoute(routeId) {
-    _checkedRouteIds.delete(routeId);
+    if (!Array.isArray(routeId)) {
+        routeId = [routeId];
+    }
+    routeId.forEach((id) => {
+        _checkedRouteIds.delete(id);
+    });
 }
 
 function _resetCheckedRoutes() {
