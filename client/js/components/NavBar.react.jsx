@@ -12,14 +12,10 @@ function getTitle(currentRoutes) {
 }
 
 function getActions(checkedRouteIds) {
-    function showCheckedRoutes() {
-        AppViewActionCreators.resetCheckedRoutes(checkedRouteIds);
-    }
-
     if (checkedRouteIds.length) {
         return <button
                 className='draw'
-                onClick={showCheckedRoutes}
+                onClick={AppViewActionCreators.showMultipleRoutes(checkedRouteIds)}
                 dangerouslySetInnerHTML={{__html: AppConstants.Icons.CHECK}} />;
     }
     return <a className='info' href='#/info' dangerouslySetInnerHTML={{__html: AppConstants.Icons.HELP}} />;

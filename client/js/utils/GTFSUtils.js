@@ -1,4 +1,4 @@
-function _convertRawDirection(rawDirection) {
+    function _convertRawDirection(rawDirection) {
     return {
         directionId: rawDirection.direction_id,
         headsign: rawDirection.headsign

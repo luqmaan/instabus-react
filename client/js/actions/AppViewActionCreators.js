@@ -35,7 +35,7 @@ module.exports = {
         });
     },
 
-    resetCheckedRoutes(routeIds) {
+    showMultipleRoutes(routeIds) {
         AppDispatcher.handleViewAction({
             type: AppConstants.ActionTypes.ROUTE_RESET_CHECKED,
         });

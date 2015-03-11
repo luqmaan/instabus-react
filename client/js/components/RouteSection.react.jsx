@@ -16,7 +16,7 @@ function getRouteListItems(routes) {
             <RouteListItem
                 checked={checked}
                 route={route}
-                key={'routelistitem:' + routeId} />
+                key={`routelistitem:${routeId}`} />
         );
     });
 }

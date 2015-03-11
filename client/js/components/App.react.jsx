@@ -8,6 +8,7 @@ var RouteSection = require('./RouteSection.react.jsx');
 var ArrivalSection = require('./ArrivalSection.react.jsx');
 var MapSection = require('./MapSection.react.jsx');
 var NavBar = require('./NavBar.react.jsx');
+var AppRouter = require('./AppRouter.react.jsx');
 
 function getStateFromStores() {
     return {

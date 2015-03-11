@@ -25,6 +25,7 @@
     "keymirror": "^0.1.1",
     "leaflet.label": "file:../../../../var/folders/1v/ctqk6mrx7_767q2wpvn107580000gn/T/npm-37326-5aedc16a/git-cache-d360a74fe4fa/d0ab529a6e3c3de4161a9324ad9ae2e960a67878",
     "object-assign": "^2.0.0",
+    "qs": "^2.3.3",
     "reactify": "^1.0.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

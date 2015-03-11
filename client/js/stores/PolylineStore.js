@@ -32,9 +32,12 @@ var PolylineStore = assign({}, EventEmitter.prototype, {
 
     getCurrent() {
         var currentPolylines = [];
-        RouteStore.getCurrentIds().map(
-            (routeId) => currentPolylines.push(_polylines[routeId])
-        );
+        RouteStore.getCurrentIds().forEach((routeId) => {
+            var polyline = _polylines[routeId];
+            if (polyline) {
+                currentPolylines.push(polyline);
+            }
+        });
         return currentPolylines;
     },
 
