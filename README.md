@@ -1,27 +1,10 @@
-# React.js Seed
+Fork of https://github.com/luqmaan/instabus
 
-This project is an application skeleton for a typical [React.js](http://facebook.github.io/react/index.html) web app.
-You can use it to quickly bootstrap your react.js projects.
-
-## Getting Started
-
-### Clone the Project
+Give it a whirl:
 
 ```
-git clone https://github.com/fizerkhan/react-seed.git
-cd react-seed
-```
-
-### Install dependencies
-
-```
+git clone https://github.com/luqmaan/instabus-react.git
+cd instabus-react
 npm install
+gulp clean && gulp
 ```
-
-### Run the Application
-
-```
-gulp
-```
-
-Now browse to the app at [http://localhost:8000](http://localhost:8000)
