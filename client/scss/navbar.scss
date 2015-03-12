@@ -5,7 +5,7 @@
     font-weight: 300;
     padding: 5px 10px;
     background: rgb(207,30,30);
-    transition: background-color 100ms ease-in-out;
+    transition: background-color 30ms ease-in-out;
 
     .logo {
         flex: 1;
@@ -14,7 +14,7 @@
         justify-content: flex-start;
         h1 {
             font-weight: 300;
-            transition: color 200ms ease-in-out;
+            transition: color 30ms ease-in-out;
             font-size: 1.1em;
         }
     }
@@ -37,14 +37,14 @@
         cursor: pointer;
         display: flex;
         svg * {
-            transition: fill 200ms ease-in-out;
+            transition: fill 30ms ease-in-out;
             fill: rgba(255, 255, 255, 0.9);
         }
     }
 
     .info {
         svg {
-            transition: fill 200ms ease-in-out;
+            transition: fill 30ms ease-in-out;
             fill: rgba(255, 255, 255, 0.9);
         }
         &:hover {
@@ -65,11 +65,8 @@
 
     &.checked {
         background: rgb(255, 255, 255);
-        a {
-            color: rgba(140, 140, 140, 0.8);
-        }
-        .unicon svg * {
-            fill: rgba(140, 140, 140, 0.8);
+        .logo {
+            visibility: hidden;
         }
     }
 

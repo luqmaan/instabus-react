@@ -4,6 +4,7 @@ var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var GTFSUtils = require('../utils/GTFSUtils');
+var GTFSWebAPIUtils = require('../utils/GTFSWebAPIUtils');
 
 var CHANGE_EVENT = 'change';
 
@@ -21,10 +22,17 @@ function _addRoutes(rawRoutes) {
 
 function _addCurrentRoute(routeId) {
     _currentRouteIds.add(routeId);
+
+    GTFSWebAPIUtils.getStopsForRoute(routeId);
+    GTFSWebAPIUtils.getPolylinesForRoute(routeId);
 }
 
 function _removeCurrentRoute(routeId) {
     _currentRouteIds.delete(routeId);
+}
+
+function _clearCurrentRoutes(routeId) {
+    _currentRouteIds.clear();
 }
 
 function _addCheckedRoute(routeId) {
@@ -45,7 +53,7 @@ function _removeCheckedRoute(routeId) {
     });
 }
 
-function _resetCheckedRoutes() {
+function _clearCheckedRoutes() {
     _checkedRouteIds.clear();
 }
 
@@ -128,6 +136,7 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
 
         case AppConstants.ActionTypes.ROUTE_SHOW:
             _addCurrentRoute(action.routeId);
+            _clearCheckedRoutes();
             RouteStore.emitChange();
             break;
 
@@ -146,11 +155,16 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
             RouteStore.emitChange();
             break;
 
-        case AppConstants.ActionTypes.ROUTE_RESET_CHECKED:
-            _resetCheckedRoutes();
+        case AppConstants.ActionTypes.ROUTE_SHOW_MULTIPLE:
+            _clearCheckedRoutes();
+            action.routeIds.forEach(_addCurrentRoute);
             RouteStore.emitChange();
             break;
 
+        case AppConstants.ActionTypes.ROUTE_HIDE_ALL:
+            _clearCurrentRoutes();
+            RouteStore.emitChange();
+            break;
         default:
             // po op
     }

@@ -5,7 +5,10 @@ module.exports = {
     getAllRoutes() {
         var rawRoutes = require('../../data/routes.json');
 
-        AppServerActionCreators.receiveRoutes(rawRoutes);
+        // FIXME: fetch this
+        setTimeout(function() {
+            AppServerActionCreators.receiveRoutes(rawRoutes);
+        }, 0);
     },
 
     getStopsForRoute(routeId) {
@@ -17,7 +20,10 @@ module.exports = {
 
         var rawStops = staticStops[routeId];
 
-        AppServerActionCreators.receiveStops(routeId, rawStops);
+        // FIXME: fetch this
+        setTimeout(function() {
+            AppServerActionCreators.receiveStops(routeId, rawStops);
+        }, 0);
     },
 
     getPolylinesForRoute(routeId) {
@@ -29,6 +35,9 @@ module.exports = {
 
         var rawPolylines = staticPolylines[routeId];
 
-        AppServerActionCreators.receivePolylines(routeId, rawPolylines);
+        // FIXME: fetch this
+        setTimeout(function() {
+            AppServerActionCreators.receivePolylines(routeId, rawPolylines);
+        }, 0);
     }
 };

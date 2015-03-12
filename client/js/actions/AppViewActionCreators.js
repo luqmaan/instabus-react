@@ -1,6 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
-var GTFSWebAPIUtils = require('../utils/GTFSWebAPIUtils');
 
 
 module.exports = {
@@ -9,9 +8,6 @@ module.exports = {
             type: AppConstants.ActionTypes.ROUTE_SHOW,
             routeId: routeId,
         });
-
-        GTFSWebAPIUtils.getStopsForRoute(routeId);
-        GTFSWebAPIUtils.getPolylinesForRoute(routeId);
     },
 
     hideRoute(routeId) {
@@ -37,9 +33,22 @@ module.exports = {
 
     showMultipleRoutes(routeIds) {
         AppDispatcher.handleViewAction({
-            type: AppConstants.ActionTypes.ROUTE_RESET_CHECKED,
+            type: AppConstants.ActionTypes.ROUTE_SHOW_MULTIPLE,
+            routeIds: routeIds,
         });
+    },
 
-        routeIds.forEach(this.showRoute);
+    hideAllRoutes(routeIds) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.ROUTE_HIDE_ALL,
+            routeIds: routeIds,
+        });
+    },
+
+    hashChange(hash) {
+        AppDispatcher.handleViewAction({
+            type: AppConstants.ActionTypes.HASH_CHANGE,
+            hash: hash,
+        });
     }
 };

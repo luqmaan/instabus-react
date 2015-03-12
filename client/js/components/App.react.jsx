@@ -13,6 +13,7 @@ var AppRouter = require('./AppRouter.react.jsx');
 function getStateFromStores() {
     return {
         currentRoutes: RouteStore.getCurrent(),
+        currentRouteIds: RouteStore.getCurrentIds(),
         checkedRoutes: RouteStore.getChecked(),
         checkedRouteIds: RouteStore.getCheckedIds(),
         routes: RouteStore.getAll(),
@@ -65,13 +66,15 @@ var App = React.createClass({
             routeSection = (
                 <div className='content-wrapper'>
                     <RouteSection
-                        routes={this.state.routes} />
+                        routes={this.state.routes}
+                        checkedRouteIds={this.state.checkedRouteIds} />
                 </div>
             );
 
         }
         return (
             <div className='app-wrapper'>
+                <AppRouter currentRouteIds={this.state.currentRouteIds}/>
                 <NavBar
                     currentRoutes={this.state.currentRoutes}
                     checkedRouteIds={this.state.checkedRouteIds} />
