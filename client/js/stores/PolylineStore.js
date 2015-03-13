@@ -11,8 +11,8 @@ var CHANGE_EVENT = 'change';
 var _polylines = {};
 
 function _addPolylines(routeId, rawPolylines) {
-    rawPolylines.forEach((rawPolyline) => {
-        _polylines[routeId] = GTFSUtils.convertRawPolyline(rawPolyline);
+    _polylines[routeId] = rawPolylines.map((rawPolyline) => {
+        return GTFSUtils.convertRawPolyline(rawPolyline);
     });
 }
 
@@ -30,14 +30,21 @@ var PolylineStore = assign({}, EventEmitter.prototype, {
         this.removeListener(CHANGE_EVENT, callback);
     },
 
+    getPolylinesForRoute(routeId) {
+        return _polylines[routeId];
+    },
+
     getCurrent() {
         var currentPolylines = [];
+
         RouteStore.getCurrentIds().forEach((routeId) => {
-            var polyline = _polylines[routeId];
-            if (polyline) {
-                currentPolylines.push(polyline);
+            if (this.getPolylinesForRoute(routeId)) {
+                this.getPolylinesForRoute(routeId).forEach((polyline) => {
+                    currentPolylines.push(polyline);
+                });
             }
-        });
+        }, this);
+
         return currentPolylines;
     },
 

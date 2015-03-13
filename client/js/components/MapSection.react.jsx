@@ -28,14 +28,15 @@ function getStopMarker(stop) {
 }
 
 function getPolylineLayer(polyline) {
+
     return (
         <Polyline
             positions={polyline.positions}
             key={'polyline:' + polyline.shapeId}
-            color='rgb(199,16,22)'
+            color='rgb(66,64,62)'
             stroke={true}
             weight={5}
-            opacity={0.5}
+            opacity={0.3}
             smoothFactor={1} />
     );
 }
@@ -57,6 +58,9 @@ function getVehicleMarker(vehicle) {
             className='vehicle-marker'
             icon={icon}
             animateSteps={200} >
+            <Popup>
+              <span>{vehicle.vehicleId}</span>
+            </Popup>
         </VehicleMarker>
     );
 }
