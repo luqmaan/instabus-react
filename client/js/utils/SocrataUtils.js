@@ -6,9 +6,10 @@ function convertRawLocation(rawLocation) {
     };
 }
 
-function convertRawTime(rawTime) {
-    return rawTime;
+function convertRawUpdateTime(rawTime) {
+    return rawTime.replace(/^0/g, '').replace('AM', '').replace('PM', '');
 }
+
 
 module.exports = {
     convertRawVehicle(rawVehicle) {
@@ -17,7 +18,8 @@ module.exports = {
             vehicleId: Number(rawVehicle.vehicleid),
             heading: Number(rawVehicle.heading) * 10,
             position: convertRawLocation(rawVehicle.location),
-            updateTime: convertRawTime(rawVehicle.iso_timestamp),
+            updateTime: convertRawUpdateTime(rawVehicle.updatetime),
+            directionSymbol: rawVehicle.direction,
         };
     },
 };

@@ -47,9 +47,11 @@ function getVehicleMarker(vehicle) {
         html: AppConstants.Icons.VEHICLE.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
     });
 
+    var label = `${vehicle.routeId}-${vehicle.directionSymbol} ${vehicle.updateTime}`;
+
     return (
         <VehicleMarker
-            label={vehicle.updateTime}
+            label={label}
             position={vehicle.position}
             key={'vehicle:' + vehicle.vehicleId}
             className='vehicle-marker'
