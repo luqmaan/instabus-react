@@ -53,5 +53,9 @@ module.exports = React.createClass({
         var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
         animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
     }
+    if (this.props.label !== prevProps.label) {
+        this._leafletElement.label._content = this.props.label;
+        this._leafletElement.label._update();
+    }
   }
 });

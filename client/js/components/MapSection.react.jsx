@@ -37,7 +37,7 @@ function getPolylineLayer(polyline) {
             color='rgb(130,127,122)'
             stroke={true}
             weight={5}
-            opacity={1}
+            opacity={0.5}
             smoothFactor={1} />
     );
 }
