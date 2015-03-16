@@ -19,9 +19,9 @@ function getStopMarker(stop) {
             label={stop.name}
             radius={10}
             opacity={1}
-            weight={3}
-            color='rgb(215,55,23)'
-            fillColor='rgba(255, 255, 255, 0.95)'
+            weight={2}
+            color='rgba(255, 255, 255, 0.95)'
+            fillColor='rgb(215,55,23)'
             fill={true}
             fillOpacity={1} >
         </StopMarker>
@@ -34,11 +34,10 @@ function getPolylineLayer(polyline) {
         <RoutePolyline
             positions={polyline.positions}
             key={'polyline:' + polyline.shapeId}
-            color='rgb(66,64,62)'
+            color='rgb(130,127,122)'
             stroke={true}
             weight={5}
             opacity={1}
-            dashArray={[10, 15]}
             smoothFactor={1} />
     );
 }
