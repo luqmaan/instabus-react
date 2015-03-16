@@ -7,20 +7,21 @@ var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = ReactLeaflet;
 var AppConstants = require('../constants/AppConstants');
 var VehicleMarker = require('./VehicleMarker.react.jsx');
 var StopMarker = require('./StopMarker.react.jsx');
+var RoutePolyline = require('./RoutePolyline.react.jsx');
 
 
 function getStopMarker(stop) {
     if (!stop) return;
     return (
         <StopMarker
-            center={{lat: stop.stop_lat, lng: stop.stop_lon}}
-            key={'stop:' + stop.direction_id + ':' + stop.stop_id}
-            label={stop.stop_name}
-            radius={12}
+            center={{lat: stop.lat, lng: stop.lon}}
+            key={'stop:' + stop.stopId}
+            label={stop.name}
+            radius={10}
             opacity={1}
             weight={3}
-            color='white'
-            fillColor='rgb(199,16,22)'
+            color='rgb(215,55,23)'
+            fillColor='rgba(255, 255, 255, 0.95)'
             fill={true}
             fillOpacity={1} >
         </StopMarker>
@@ -30,13 +31,14 @@ function getStopMarker(stop) {
 function getPolylineLayer(polyline) {
 
     return (
-        <Polyline
+        <RoutePolyline
             positions={polyline.positions}
             key={'polyline:' + polyline.shapeId}
             color='rgb(66,64,62)'
             stroke={true}
             weight={5}
-            opacity={0.3}
+            opacity={1}
+            dashArray={[10, 15]}
             smoothFactor={1} />
     );
 }

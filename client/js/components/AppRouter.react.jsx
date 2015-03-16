@@ -1,6 +1,5 @@
 var React = require('react');
 
-var AppRouterStore = require('../stores/AppRouterStore');
 var AppViewActionCreators = require('../actions/AppViewActionCreators');
 
 

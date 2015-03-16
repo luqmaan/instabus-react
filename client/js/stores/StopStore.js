@@ -4,13 +4,17 @@ var EventEmitter = require('events').EventEmitter;
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var RouteStore = require('../stores/RouteStore');
+var GTFSUtils = require('../utils/GTFSUtils');
 
 var CHANGE_EVENT = 'change';
 
+// FIXME: stops should just be a list
+// each stop should have the list of route ids it is associated with
+// do a lookup by that list when displaying stops
 var _stops = {};
 
 function _addStops(routeId, rawStops) {
-    _stops[routeId] = rawStops;
+    _stops[routeId] = rawStops.map(GTFSUtils.convertRawStop);
 }
 
 
@@ -33,7 +37,7 @@ var StopStore = assign({}, EventEmitter.prototype, {
         RouteStore.getCurrentIds().map((routeId) => {
             var stopsForRoute = _stops[routeId] || [];
             stopsForRoute.forEach((stop) => {
-                currentStops[stop.stop_id] = stop;
+                currentStops[stop.stopId] = stop;
             });
         });
 
