@@ -1,5 +1,6 @@
 var React = require('react');
 
+var AppConstants = require('../constants/AppConstants');
 var RouteStore = require('../stores/RouteStore');
 var StopStore = require('../stores/StopStore');
 var PolylineStore = require('../stores/PolylineStore');
@@ -55,7 +56,7 @@ var App = React.createClass({
         if (this.state.currentRoutes.length) {
             mapSection = (
                 <MapSection
-                    initialPosition={[30.267153, -97.743061]}
+                    initialPosition={AppConstants.Map.INITIAL_POSITION}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
                     poylines={this.state.polylines}

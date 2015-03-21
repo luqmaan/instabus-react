@@ -31,9 +31,10 @@
     "watchify": "^2.4.0"
   },
   "dependencies": {
-    "leaflet": "^0.7.3",
-    "protobufjs": "^3.8.2",
     "flux": "^2.0.1",
+    "leaflet": "^0.7.3",
+    "moment": "^2.9.0",
+    "protobufjs": "^3.8.2",
     "react": "~0.12.0",
     "react-leaflet": "^0.3.0",
     "superagent": "^0.21.0"

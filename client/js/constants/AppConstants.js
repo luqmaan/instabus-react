@@ -17,6 +17,9 @@ module.exports = {
         SERVER_ACTION: 'SERVER_ACTION',
         VIEW_ACTION: 'VIEW_ACTION',
     },
+    Map: {
+        INITIAL_POSITION: [30.267153, -97.743061],
+    },
     Icons: {
         VEHICLE: `
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>

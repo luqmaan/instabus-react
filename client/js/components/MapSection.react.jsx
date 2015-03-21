@@ -37,7 +37,7 @@ function getPolylineLayer(polyline) {
             color='rgb(130,127,122)'
             stroke={true}
             weight={5}
-            opacity={0.5}
+            opacity={0.3}
             smoothFactor={1} />
     );
 }
@@ -49,7 +49,7 @@ function getVehicleMarker(vehicle) {
         html: AppConstants.Icons.VEHICLE.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
     });
 
-    var label = `${vehicle.routeId}-${vehicle.directionSymbol} ${vehicle.updateTime}`;
+    var label = `${vehicle.routeId}-${vehicle.directionSymbol} ${vehicle.formattedUpdateTime}`;
 
     return (
         <VehicleMarker
