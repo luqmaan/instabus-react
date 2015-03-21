@@ -72,15 +72,21 @@ gulp.task('styles', function () {
         .pipe(connect.reload());
 });
 
-gulp.task('copy', function(){
+gulp.task('copy-html', function(){
     gulp.src('client/*.html')
         .pipe(gulp.dest('build/'))
         .pipe(gprint());
 });
 
+gulp.task('copy-gtfs', function(){
+    gulp.src('gtfs/*')
+        .pipe(gulp.dest('build/gtfs'))
+        .pipe(gprint());
+});
+
 gulp.task('watch', function() {
     gulp.watch('client/scss/**/*.scss', [ 'styles' ]);
-    gulp.watch('client/*.html', [ 'copy' ]);
+    gulp.watch('client/*.html', [ 'copy-html' ]);
 });
 
 gulp.task('webserver', function() {
@@ -92,5 +98,5 @@ gulp.task('webserver', function() {
     });
 });
 
-gulp.task('build', ['clean', 'styles', 'browserify', 'copy']);
+gulp.task('build', ['clean', 'styles', 'browserify', 'copy-html']);
 gulp.task('default', ['build', 'webserver', 'watch']);
