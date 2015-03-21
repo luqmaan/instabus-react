@@ -49,12 +49,12 @@ function getVehicleIcon(vehicle) {
     formattedVehicleHtml = formattedVehicleHtml.replace('{route-id}', vehicle.routeId);
     formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol}', vehicle.directionSymbol);
 
-    var directionArrowFills = {
+    var vehicleStatusColors = {
         'green': 'rgb(53,169,38)',
         'orange': 'rgb(206,156,43)',
         'red': 'rgb(207,30,30)',
     };
-    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-arrow-fill}', directionArrowFills[vehicle.updateStatus]);
+    formattedVehicleHtml = formattedVehicleHtml.replace(/{vehicle-status-color}/g, vehicleStatusColors[vehicle.updateStatus]);
 
 
     var offsetIndex = String(vehicle.routeId).length - 1;
