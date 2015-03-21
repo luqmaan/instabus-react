@@ -20,10 +20,10 @@ function getStopMarker(stop) {
             radius={10}
             opacity={1}
             weight={2}
-            color='rgba(255, 255, 255, 0.95)'
-            fillColor='rgb(215,55,23)'
+            color='rgb(255, 255, 255)'
+            fillColor='rgb(100,102,109)'
             fill={true}
-            fillOpacity={1} >
+            fillOpacity={0.7} >
         </StopMarker>
     );
 }
@@ -42,18 +42,41 @@ function getPolylineLayer(polyline) {
     );
 }
 
+function getVehicleIcon(vehicle) {
+    var formattedVehicleHtml = AppConstants.Icons.VEHICLE;
+
+    formattedVehicleHtml = formattedVehicleHtml.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 26 26)');
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id}', vehicle.routeId);
+    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol}', vehicle.directionSymbol);
+
+    var directionArrowFills = {
+        'green': 'rgb(53,169,38)',
+        'orange': 'rgb(206,156,43)',
+        'red': 'rgb(207,30,30)',
+    };
+    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-arrow-fill}', directionArrowFills[vehicle.updateStatus]);
+
+
+    var offsetIndex = String(vehicle.routeId).length - 1;
+    var xOffsets = [23, 20, 17, 14];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-x-offset}', xOffsets[offsetIndex]);
+    var yOffsets = [24, 25, 26, 27.5];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-y-offset}', yOffsets[offsetIndex]);
+    var yDirectionOffsets = [35, 36, 37, 39];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol-y-offset}', yDirectionOffsets[offsetIndex]);
+
+    return Leaflet.divIcon({
+        className: 'vehicle-icon',
+        html: formattedVehicleHtml,
+    });
+}
+
 function getVehicleMarker(vehicle) {
     if (!vehicle) return;
-    var icon = Leaflet.divIcon({
-        className: 'vehicle-icon',
-        html: AppConstants.Icons.VEHICLE.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 15 15)')
-    });
-
-    var label = `${vehicle.routeId}-${vehicle.directionSymbol} ${vehicle.formattedUpdateTime}`;
+    var icon = getVehicleIcon(vehicle);
 
     return (
         <VehicleMarker
-            label={label}
             position={vehicle.position}
             key={'vehicle:' + vehicle.vehicleId}
             className='vehicle-marker'

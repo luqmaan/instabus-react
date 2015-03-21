@@ -28,6 +28,20 @@ function formatUpdateTime(updateTime) {
     }
 }
 
+function formatUpdateStatus(updateTime) {
+    var now = moment();
+    var diff = updateTime.diff(now, 'minutes');
+
+    if (diff >= -2) {
+        return 'green';
+    }
+    else if (diff >= -5) {
+        return 'orange';
+    }
+    else {
+        return 'red';
+    }
+}
 
 module.exports = {
     convertRawVehicle(rawVehicle) {
@@ -40,6 +54,7 @@ module.exports = {
             position: convertRawLocation(rawVehicle.location),
             updateTime: updateTime,
             formattedUpdateTime: formatUpdateTime(updateTime),
+            updateStatus: formatUpdateStatus(updateTime),
             directionSymbol: rawVehicle.direction,
         };
     },

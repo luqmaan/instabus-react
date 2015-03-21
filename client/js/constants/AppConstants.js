@@ -22,22 +22,28 @@ module.exports = {
     },
     Icons: {
         VEHICLE: `
-            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-            <svg class="vehicle-icon-svg"  width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
-                <defs></defs>
-                <g transform="scale(1.5)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-                   <circle id="Oval-1" stroke="#E1E1E1" opacity="0.95" fill="#FFFFFF" sketch:type="MSShapeGroup" cx="15" cy="15" r="15"></circle>
-                    <path transform="{svg-transform}" d="M15,5 L22,23.6666667 L15,19 L15,5 L15,5 Z M15,5 L8,23.6666667 L15,19 L15,5 L15,5 Z" class="Arrow" fill="rgb(28,161,250)" sketch:type="MSShapeGroup"></path>
-                    <mask id="mask-2" sketch:name="Path 2" fill="white">
-                        <use xlink:href="#path-1"></use>
-                    </mask>
-                    <use id="Path-2" stroke="#979797" sketch:type="MSShapeGroup" xlink:href="#path-1"></use>
-                </g>
-            </svg>
+        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+        <svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
+            <title>Slice 1</title>
+            <desc>Created with Sketch.</desc>
+            <defs></defs>
+            <g  transform="{svg-transform}" id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <path d="M26.2340426,43.137931 C35.7521414,43.137931 43.4680851,35.4958949 43.4680851,26.0689655 C43.4680851,16.6420362 35.7521414,9 26.2340426,9 C16.7159437,9 9,16.6420362 9,26.0689655 C9,35.4958949 16.7159437,43.137931 26.2340426,43.137931 Z" id="Oval-1" stroke="#E1E1E1" stroke-width="1.5" opacity="0.95" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+                    <path fill="{direction-arrow-fill}" d="M25.9787234,0 L30.9574468,9.86206897 C30.9574468,9.86206897 28.7601812,9.17197602 26.210044,9.17197602 C23.6599069,9.17197602 21,9.86206897 21,9.86206897 L25.9787234,0 Z" id="Triangle-1" sketch:type="MSShapeGroup"></path>
+                    <text id="801X" sketch:type="MSTextLayer" font-family="Helvetica" font-size="10.5882353" font-weight="bold" sketch:alignment="middle" fill="#626262">
+                        <tspan x="{route-id-x-offset}" y="{route-id-y-offset}">{route-id}</tspan>
+                    </text>
+                    <text id="N" sketch:type="MSTextLayer" font-family="Helvetica" font-size="10.5" font-weight="normal" fill="#A3A3A3">
+                        <tspan x="23" y="{direction-symbol-y-offset}">{direction-symbol}</tspan>
+                    </text>
+            </g>
+        </svg>
+
         `,
         MUNICORN: `
             <svg width="44px" height="44px" viewBox="0 0 44 44">
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"./>
                     <g transform="translate(3.000000, 1.000000)" id="Artboard-1" fill="#CF1E1E">
                         <g>
                             <g id="unicorn-4">

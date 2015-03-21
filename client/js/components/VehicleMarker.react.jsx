@@ -42,7 +42,7 @@ module.exports = React.createClass({
             noHide: true,
             direction: 'left',
             className: 'vehicle-leaflet-label',
-            offset: [25, -10],
+            offset: [15, -7],
        });
     }
   },
