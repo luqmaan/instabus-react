@@ -11,9 +11,7 @@ var CHANGE_EVENT = 'change';
 var _polylines = {};
 
 function _addPolylines(routeId, rawPolylines) {
-    _polylines[routeId] = rawPolylines.map((rawPolyline) => {
-        return GTFSUtils.convertRawPolyline(rawPolyline);
-    });
+    _polylines[routeId] = rawPolylines.shapes;
 }
 
 
@@ -55,9 +53,9 @@ var PolylineStore = assign({}, EventEmitter.prototype, {
 
 
 PolylineStore.dispatchToken = AppDispatcher.register((payload) => {
-    AppDispatcher.waitFor([
-        RouteStore.dispatchToken,
-    ]);
+    // AppDispatcher.waitFor([
+    //     RouteStore.dispatchToken,
+    // ]);
 
     var action = payload.action;
 

@@ -32,10 +32,10 @@ function formatUpdateStatus(updateTime) {
     var now = moment();
     var diff = updateTime.diff(now, 'minutes');
 
-    if (diff >= -2) {
+    if (diff > -2) {
         return 'green';
     }
-    else if (diff >= -5) {
+    else if (diff > -5) {
         return 'orange';
     }
     else {
@@ -52,7 +52,7 @@ module.exports = {
             vehicleId: Number(rawVehicle.vehicleid),
             heading: Number(rawVehicle.heading) * 10,
             position: convertRawLocation(rawVehicle.location),
-            updateTime: updateTime,
+            updateTime: rawVehicle.updatetime,
             formattedUpdateTime: formatUpdateTime(updateTime),
             updateStatus: formatUpdateStatus(updateTime),
             directionSymbol: rawVehicle.direction,

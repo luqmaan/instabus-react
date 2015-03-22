@@ -24,6 +24,9 @@ body {
     max-height: 100%;
     overflow: hidden;
 }
+#app {
+    overflow: scroll;
+}
 .content-wrapper, .navbar {
     button:focus {
         outline: 0;

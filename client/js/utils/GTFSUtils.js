@@ -15,12 +15,6 @@ module.exports = {
             name: rawRoute.name,
         };
     },
-    convertRawPolyline: function(rawPolyline) {
-        return {
-            shapeId: rawPolyline[0].shape_id,
-            positions: rawPolyline,
-        };
-    },
     convertRawStop: function(rawStop) {
         return {
             lat: Number(rawStop.stop_lat),

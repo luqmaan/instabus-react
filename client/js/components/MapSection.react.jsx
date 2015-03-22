@@ -17,11 +17,11 @@ function getStopMarker(stop) {
             center={{lat: stop.lat, lng: stop.lon}}
             key={'stop:' + stop.stopId}
             label={stop.name}
-            radius={10}
+            radius={8}
             opacity={1}
-            weight={2}
-            color='rgb(255, 255, 255)'
-            fillColor='rgb(100,102,109)'
+            width={2}
+            color='rgb(142,139,139)'
+            fillColor='rgb(166,163,163)'
             fill={true}
             fillOpacity={0.7} >
         </StopMarker>
@@ -33,7 +33,7 @@ function getPolylineLayer(polyline) {
     return (
         <RoutePolyline
             positions={polyline.positions}
-            key={'polyline:' + polyline.shapeId}
+            key={'polyline:' + polyline.shape_id}
             color='rgb(130,127,122)'
             stroke={true}
             weight={5}
@@ -43,6 +43,7 @@ function getPolylineLayer(polyline) {
 }
 
 function getVehicleIcon(vehicle) {
+    // FIXME: These are not being updated
     var formattedVehicleHtml = AppConstants.Icons.VEHICLE;
 
     formattedVehicleHtml = formattedVehicleHtml.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 26 26)');
@@ -81,9 +82,9 @@ function getVehicleMarker(vehicle) {
             key={'vehicle:' + vehicle.vehicleId}
             className='vehicle-marker'
             icon={icon}
-            animateSteps={200} >
+            animateSteps={200}>
             <Popup>
-              <span>{vehicle.vehicleId}</span>
+                <div>{vehicle.vehicleId} {vehicle.updateTime} {vehicle.formattedUpdateTime}</div>
             </Popup>
         </VehicleMarker>
     );
@@ -94,18 +95,41 @@ var MapSection = React.createClass({
     propTypes: {
         routes: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         stops: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-        poylines: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        polylines: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         vehicles: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     },
 
+    getInitialState() {
+        return {
+            mounted: false,
+        };
+    },
+
+    componentWillUnmount() {
+        this.setState({
+            mounted: false,
+        });
+    },
+
     render() {
-        var stopLayers = this.props.stops.map(getStopMarker);
-        var polylineLayers = this.props.poylines.map(getPolylineLayer);
-        var vehicleLayers = this.props.vehicles.map(getVehicleMarker);
+        var stopLayers;
+        var polylineLayers;
+        var vehicleLayers;
+
+        if (this.state.mounted) {
+            stopLayers = this.props.stops.map(getStopMarker);
+            polylineLayers = this.props.polylines.map(getPolylineLayer);
+            vehicleLayers = this.props.vehicles.map(getVehicleMarker);
+        }
+
+        this.state.mounted = true;
 
         return (
             <div id='map-wrapper'>
-                <Map center={this.props.initialPosition} zoom={13} id='map'>
+                <Map
+                    center={this.props.initialPosition}
+                    zoom={13}
+                    id='map'>
                     <TileLayer
                         url='https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png'
                         attribution='<a href="http://openstreetmap.org">OpenStreetMap</a> | <a href="http://mapbox.com">Mapbox</a>'

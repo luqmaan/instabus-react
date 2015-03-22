@@ -27,6 +27,23 @@ function _addCurrentRoute(routeId) {
     GTFSWebAPIUtils.getPolylinesForRoute(routeId);
 }
 
+function _setMultipleRoutes(routeIds) {
+    _currentRouteIds.clear();
+
+    routeIds.forEach((routeId) => {
+        _currentRouteIds.add(routeId);
+    });
+
+    if (routeIds.length <= 3) {
+        routeIds.forEach(GTFSWebAPIUtils.getStopsForRoute);
+    }
+    else {
+        console.debug('Not showing stops for ${routeIds.length} routes');
+    }
+
+    routeIds.forEach(GTFSWebAPIUtils.getPolylinesForRoute);
+}
+
 function _removeCurrentRoute(routeId) {
     _currentRouteIds.delete(routeId);
 }
@@ -157,7 +174,7 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
 
         case AppConstants.ActionTypes.ROUTE_SHOW_MULTIPLE:
             _clearCheckedRoutes();
-            action.routeIds.forEach(_addCurrentRoute);
+            _setMultipleRoutes(action.routeIds);
             RouteStore.emitChange();
             break;
 

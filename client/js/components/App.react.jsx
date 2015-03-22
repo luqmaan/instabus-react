@@ -53,13 +53,15 @@ var App = React.createClass({
         var mapSection;
         var routeSection;
 
+        console.log('render');
+
         if (this.state.currentRoutes.length) {
             mapSection = (
                 <MapSection
                     initialPosition={AppConstants.Map.INITIAL_POSITION}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
-                    poylines={this.state.polylines}
+                    polylines={this.state.polylines}
                     vehicles={this.state.vehicles} />
             );
         }
@@ -73,9 +75,9 @@ var App = React.createClass({
             );
 
         }
+
         return (
             <div className='app-wrapper'>
-                <AppRouter currentRouteIds={this.state.currentRouteIds}/>
                 <NavBar
                     currentRoutes={this.state.currentRoutes}
                     checkedRouteIds={this.state.checkedRouteIds} />
