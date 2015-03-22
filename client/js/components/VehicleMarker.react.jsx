@@ -29,12 +29,7 @@ function formatVehicleIconHTML(heading, routeId, directionSymbol, updateStatus) 
     formattedVehicleHtml = formattedVehicleHtml.replace('{route-id}', routeId);
     formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol}', directionSymbol);
 
-    var vehicleStatusColors = {
-        'green': 'rgb(53,169,38)',
-        'orange': 'rgb(206,156,43)',
-        'red': 'rgb(207,30,30)',
-    };
-    formattedVehicleHtml = formattedVehicleHtml.replace(/{vehicle-status-color}/g, vehicleStatusColors[updateStatus]);
+    formattedVehicleHtml = formattedVehicleHtml.replace(/{vehicle-status-color}/g, updateStatus);
 
     var offsetIndex = String(routeId).length - 1;
     var xOffsets = [23, 20, 17, 14];
@@ -75,42 +70,26 @@ var VehicleMarker = React.createClass({
     },
 
     componentDidUpdate(prevProps) {
-        if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
-            var marker = this.getLeafletElement();
-            var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
-            animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
-        }
         if (this.props.heading !== prevProps.heading) {
             var path = this._leafletElement._icon.querySelector('#circle-shape');
             path.setAttribute('transform',  'rotate(' + this.props.heading + ' 26 26)');
         }
         if (this.props.updateStatus !== prevProps.updateStatus) {
-            var vehicleStatusColors = {
-                'green': 'rgb(53,169,38)',
-                'orange': 'rgb(206,156,43)',
-                'red': 'rgb(207,30,30)',
-            };
-            var color = vehicleStatusColors[this.props.updateStatus];
-
-            var circleBorder = this._leafletElement._icon.querySelector('#circle-border');
-            circleBorder.setAttribute('stroke', color);
-
-            var circleArrow = this._leafletElement._icon.querySelector('#circle-arrow');
-            circleArrow.setAttribute('fill', color);
+            var circleShape = this._leafletElement._icon.querySelector('#circle-shape');
+            circleShape.setAttribute('class', this.props.updateStatus);
         }
-        if (this.props.directionSymbol != prevProps.directionSymbol) {
+        if (this.props.directionSymbol !== prevProps.directionSymbol) {
             var directionSymbol = this._leafletElement._icon.querySelector('#direction-symbol tspan');
             directionSymbol.innerHTML = this.props.directionSymbol;
+        }
+        if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
+            var marker = this.getLeafletElement();
+            var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
+            animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
         }
         // STRANGER: danger
         // FIXME: What if the vehicle changes routes? The textOffsets will also need to be udpated
     },
-
-    rotate(heading) {
-    },
-
-    changeColor(updateStatus) {
-    }
 });
 
 module.exports = VehicleMarker;

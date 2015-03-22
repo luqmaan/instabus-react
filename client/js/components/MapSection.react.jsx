@@ -7,6 +7,7 @@ var {Map, Popup, TileLayer} = ReactLeaflet;
 var VehicleMarker = require('./VehicleMarker.react.jsx');
 var StopMarker = require('./StopMarker.react.jsx');
 var RoutePolyline = require('./RoutePolyline.react.jsx');
+var MapLegend = require('./MapLegend.react.jsx');
 
 
 function getStopMarker(stop) {
@@ -68,16 +69,13 @@ var MapSection = React.createClass({
         stops: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         polylines: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
         vehicles: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+        fleetUpdateTime: React.PropTypes.string.isRequired,
     },
 
     render() {
-        var stopLayers;
-        var polylineLayers;
-        var vehicleLayers;
-
-        stopLayers = this.props.stops.map(getStopMarker);
-        polylineLayers = this.props.polylines.map(getPolylineLayer);
-        vehicleLayers = this.props.vehicles.map(getVehicleMarker);
+        var stopLayers = this.props.stops.map(getStopMarker);
+        var polylineLayers = this.props.polylines.map(getPolylineLayer);
+        var vehicleLayers = this.props.vehicles.map(getVehicleMarker);
 
         return (
             <div id='map-wrapper'>
@@ -93,6 +91,7 @@ var MapSection = React.createClass({
                     {stopLayers}
                     {vehicleLayers}
                 </Map>
+                <MapLegend fleetUpdateTime={this.props.fleetUpdateTime}/>
             </div>
         );
     },

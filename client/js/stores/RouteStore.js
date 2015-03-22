@@ -34,14 +34,18 @@ function _setMultipleRoutes(routeIds) {
         _currentRouteIds.add(routeId);
     });
 
-    if (routeIds.length <= 3) {
+    if (routeIds.length <= 10) {
         routeIds.forEach(GTFSWebAPIUtils.getStopsForRoute);
     }
     else {
         console.debug('Not showing stops for ${routeIds.length} routes');
     }
-
-    routeIds.forEach(GTFSWebAPIUtils.getPolylinesForRoute);
+    if (routeIds.length <= 10) {
+        routeIds.forEach(GTFSWebAPIUtils.getPolylinesForRoute);
+    }
+    else {
+        console.debug('Not showing stops for ${routeIds.length} routes');
+    }
 }
 
 function _removeCurrentRoute(routeId) {

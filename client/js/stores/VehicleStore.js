@@ -10,7 +10,7 @@ var SocrataUtils = require('../utils/SocrataUtils');
 var CHANGE_EVENT = 'change';
 
 var _vehicles = {};
-
+var _fleetUpdateTime = '';
 
 function _addVehicles(routeId, rawVehicles) {
     rawVehicles.forEach((rawVehicle) => {
@@ -18,6 +18,10 @@ function _addVehicles(routeId, rawVehicles) {
 
         _vehicles[vehicle.vehicleId] = vehicle;
     });
+}
+
+function _setFleetUpdateTime(rawVehicles) {
+    _fleetUpdateTime = SocrataUtils.getFleetUpdateTime(rawVehicles);
 }
 
 
@@ -45,6 +49,10 @@ var VehicleStore = assign({}, EventEmitter.prototype, {
 
     getAll() {
         return _vehicles;
+    },
+
+    getFleetUpdateTime(rawVehicles) {
+        return _fleetUpdateTime;
     }
 });
 
@@ -59,6 +67,7 @@ VehicleStore.dispatchToken = AppDispatcher.register((payload) => {
     switch(action.type) {
         case AppConstants.ActionTypes.RECEIVE_RAW_VEHICLES:
             _addVehicles(action.routeId, action.rawVehicles);
+            _setFleetUpdateTime(action.rawVehicles);
             VehicleStore.emitChange();
             break;
 

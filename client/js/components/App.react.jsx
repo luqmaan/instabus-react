@@ -21,6 +21,7 @@ function getStateFromStores() {
         stops: StopStore.getCurrent(),
         polylines: PolylineStore.getCurrent(),
         vehicles: VehicleStore.getCurrent(),
+        fleetUpdateTime: VehicleStore.getFleetUpdateTime(),
         arrivals: [],
     };
 }
@@ -59,6 +60,7 @@ var App = React.createClass({
             mapSection = (
                 <MapSection
                     initialPosition={AppConstants.Map.INITIAL_POSITION}
+                    fleetUpdateTime={this.state.fleetUpdateTime}
                     routes={this.state.currentRoutes}
                     stops={this.state.stops}
                     polylines={this.state.polylines}

@@ -20,7 +20,7 @@ function formatUpdateTime(updateTime) {
         return updateTime.diff(now, 'seconds');
     }
     else if (diff < 60) {
-        return diff + 'm';
+        return diff + 'm' + updateTime.diff(now, 'seconds');
     }
     else {
         diff = updateTime.diff(now, 'hours');
@@ -30,16 +30,15 @@ function formatUpdateTime(updateTime) {
 
 function formatUpdateStatus(updateTime) {
     var now = moment();
-    var diff = updateTime.diff(now, 'minutes');
-
-    if (diff > -2) {
-        return 'green';
+    var diff = updateTime.diff(now, 'minutes') - 1;
+    if (diff >= 0) {
+        return 'status1';
     }
     else if (diff > -5) {
-        return 'orange';
+        return 'status' + Math.abs(diff);
     }
     else {
-        return 'red';
+        return 'status5';
     }
 }
 
@@ -58,4 +57,9 @@ module.exports = {
             directionSymbol: rawVehicle.direction,
         };
     },
+
+    getFleetUpdateTime(rawVehicles) {
+        var ts = rawVehicles[0].iso_timestamp;
+        return moment(ts).format('h:mm:ss A');
+    }
 };
