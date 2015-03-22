@@ -78,6 +78,7 @@ var App = React.createClass({
 
         return (
             <div className='app-wrapper'>
+                <AppRouter currentRouteIds={this.state.currentRouteIds}/>
                 <NavBar
                     currentRoutes={this.state.currentRoutes}
                     checkedRouteIds={this.state.checkedRouteIds} />

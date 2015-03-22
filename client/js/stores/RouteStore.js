@@ -182,6 +182,7 @@ RouteStore.dispatchToken = AppDispatcher.register(function(payload) {
             _clearCurrentRoutes();
             RouteStore.emitChange();
             break;
+
         default:
             // po op
     }

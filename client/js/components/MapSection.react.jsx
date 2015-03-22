@@ -99,30 +99,14 @@ var MapSection = React.createClass({
         vehicles: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     },
 
-    getInitialState() {
-        return {
-            mounted: false,
-        };
-    },
-
-    componentWillUnmount() {
-        this.setState({
-            mounted: false,
-        });
-    },
-
     render() {
         var stopLayers;
         var polylineLayers;
         var vehicleLayers;
 
-        if (this.state.mounted) {
-            stopLayers = this.props.stops.map(getStopMarker);
-            polylineLayers = this.props.polylines.map(getPolylineLayer);
-            vehicleLayers = this.props.vehicles.map(getVehicleMarker);
-        }
-
-        this.state.mounted = true;
+        stopLayers = this.props.stops.map(getStopMarker);
+        polylineLayers = this.props.polylines.map(getPolylineLayer);
+        vehicleLayers = this.props.vehicles.map(getVehicleMarker);
 
         return (
             <div id='map-wrapper'>
