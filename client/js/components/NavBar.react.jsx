@@ -6,6 +6,9 @@ var AppViewActionCreators = require('../actions/AppViewActionCreators');
 
 function getTitle(currentRoutes) {
     if (currentRoutes.length) {
+        if (currentRoutes.length > 3) {
+            return `${currentRoutes.length} Routes`;
+        }
         return currentRoutes.map((route) => route.routeId).join(', ');
     }
     return 'Instabus';
