@@ -79,7 +79,7 @@ gulp.task('copy-html', function(){
 });
 
 gulp.task('copy-gtfs', function(){
-    gulp.src('gtfs/*')
+    gulp.src('gtfs/**/*')
         .pipe(gulp.dest('build/gtfs'))
         .pipe(gprint());
 });
@@ -98,5 +98,5 @@ gulp.task('webserver', function() {
     });
 });
 
-gulp.task('build', ['clean', 'styles', 'browserify', 'copy-html']);
+gulp.task('build', ['clean', 'styles', 'browserify', 'copy-html', 'copy-gtfs']);
 gulp.task('default', ['build', 'webserver', 'watch']);
