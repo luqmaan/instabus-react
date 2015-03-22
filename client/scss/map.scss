@@ -22,6 +22,11 @@ $status5Color: rgb(188,29,35);
         &.status4 #circle-arrow { fill: $status4Color; }
         &.status5 #circle-arrow { fill: $status5Color; }
     }
+    svg.circle-marker:hover { #circle-border { fill: $status1Color; } }
+    svg.circle-marker:hover { #circle-border { fill: $status2Color; } }
+    svg.circle-marker:hover { #circle-border { fill: $status3Color; } }
+    svg.circle-marker:hover { #circle-border { fill: $status4Color; } }
+    svg.circle-marker:hover { #circle-border { fill: $status5Color; } }
 }
 .vehicle-leaflet-label {
     border: 1px solid rgb(225,225,225);

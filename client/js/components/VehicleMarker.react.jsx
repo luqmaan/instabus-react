@@ -85,11 +85,19 @@ var VehicleMarker = React.createClass({
         if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
             var marker = this.getLeafletElement();
             var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
-            animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
+            if (document.visibilityState === 'visible') {
+                animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
+            }
+            else {
+                this._leafletElement.setLatLng(this.props.position);
+            }
+
+
         }
         // STRANGER: danger
         // FIXME: What if the vehicle changes routes? The textOffsets will also need to be udpated
     },
+
 });
 
 module.exports = VehicleMarker;

@@ -23,7 +23,7 @@ module.exports = {
     Icons: {
         VEHICLE: `
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-            <svg width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+            <svg class="vehicle-marker" width="52px" height="52px" viewBox="0 0 52 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
                 <!-- Generator: Sketch 3.2.2 (9983) - http://www.bohemiancoding.com/sketch -->
                 <title>Slice 1</title>
                 <desc>Created with Sketch.</desc>
@@ -37,7 +37,7 @@ module.exports = {
                             <tspan x="{route-id-x-offset}" y="{route-id-y-offset}">{route-id}</tspan>
                         </text>
                         <text id="direction-symbol" sketch:type="MSTextLayer" font-family="Helvetica" font-size="10.5" font-weight="normal" fill="#A3A3A3">
-                            <tspan x="21" y="{direction-symbol-y-offset}">{direction-symbol}</tspan>
+                            <tspan text-anchor="middle" x="26" y="{direction-symbol-y-offset}">{direction-symbol}</tspan>
                         </text>
                 </g>
             </svg>

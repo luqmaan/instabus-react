@@ -14,17 +14,21 @@ function convertRawUpdateTime(rawTime) {
 
 function formatUpdateTime(updateTime) {
     var now = moment();
-    var diff = updateTime.diff(now, 'minutes');
+    var minutes = now.diff(updateTime, 'minutes');
+    var seconds = now.diff(updateTime, 'seconds');
 
-    if (diff >= 0) {
-        return updateTime.diff(now, 'seconds');
+    if (minutes === 0 && seconds < 60) {
+        return `${seconds} seconds ago`;
     }
-    else if (diff < 60) {
-        return diff + 'm' + updateTime.diff(now, 'seconds');
+    else if (minutes < 60) {
+        if (seconds % 60 > 10) {
+            return `${minutes} minutes ${seconds % 60} seconds ago`;
+        }
+        return `${minutes} minutes ago`;
     }
     else {
-        diff = updateTime.diff(now, 'hours');
-        return diff + 'h';
+        var hours = updateTime.diff(now, 'hours', true);
+        return `${hours} hours ago`;
     }
 }
 
