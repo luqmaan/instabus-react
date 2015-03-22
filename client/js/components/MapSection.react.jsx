@@ -2,9 +2,8 @@ var fs = require('fs');
 var React = require('react');
 var Leaflet = require('leaflet');
 var ReactLeaflet = window.ReactLeaflet = require('react-leaflet');
-var {Map, Marker, Popup, TileLayer, Polyline, CircleMarker} = ReactLeaflet;
+var {Map, Popup, TileLayer} = ReactLeaflet;
 
-var AppConstants = require('../constants/AppConstants');
 var VehicleMarker = require('./VehicleMarker.react.jsx');
 var StopMarker = require('./StopMarker.react.jsx');
 var RoutePolyline = require('./RoutePolyline.react.jsx');
@@ -42,46 +41,18 @@ function getPolylineLayer(polyline) {
     );
 }
 
-function getVehicleIcon(vehicle) {
-    // FIXME: These are not being updated
-    var formattedVehicleHtml = AppConstants.Icons.VEHICLE;
-
-    formattedVehicleHtml = formattedVehicleHtml.replace('{svg-transform}', 'rotate(' + vehicle.heading + ' 26 26)');
-    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id}', vehicle.routeId);
-    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol}', vehicle.directionSymbol);
-
-    var vehicleStatusColors = {
-        'green': 'rgb(53,169,38)',
-        'orange': 'rgb(206,156,43)',
-        'red': 'rgb(207,30,30)',
-    };
-    formattedVehicleHtml = formattedVehicleHtml.replace(/{vehicle-status-color}/g, vehicleStatusColors[vehicle.updateStatus]);
-
-
-    var offsetIndex = String(vehicle.routeId).length - 1;
-    var xOffsets = [23, 20, 17, 14];
-    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-x-offset}', xOffsets[offsetIndex]);
-    var yOffsets = [24, 25, 26, 27.5];
-    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-y-offset}', yOffsets[offsetIndex]);
-    var yDirectionOffsets = [35, 36, 37, 39];
-    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol-y-offset}', yDirectionOffsets[offsetIndex]);
-
-    return Leaflet.divIcon({
-        className: 'vehicle-icon',
-        html: formattedVehicleHtml,
-    });
-}
-
 function getVehicleMarker(vehicle) {
     if (!vehicle) return;
-    var icon = getVehicleIcon(vehicle);
-
     return (
         <VehicleMarker
             position={vehicle.position}
             key={'vehicle:' + vehicle.vehicleId}
             className='vehicle-marker'
-            icon={icon}
+            vehicleUpdateStatus={vehicle.vehicleUpdateStatus}
+            heading={vehicle.heading}
+            routeId={vehicle.routeId}
+            directionSymbol={vehicle.directionSymbol}
+            updateStatus={vehicle.updateStatus}
             animateSteps={200}>
             <Popup>
                 <div>{vehicle.vehicleId} {vehicle.updateTime} {vehicle.formattedUpdateTime}</div>

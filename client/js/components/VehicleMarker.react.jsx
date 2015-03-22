@@ -2,7 +2,8 @@ var React = require("react");
 var Leaflet = require("leaflet");
 var latlngType = require("react-leaflet").PropTypes.latlng;
 var popupContainerMixin = require("react-leaflet").mixins.popupContainer;
-require('leaflet.label');
+
+var AppConstants = require('../constants/AppConstants');
 
 function easeInOutCubic(t, b, c, d) {
     if ((t/=d/2) < 1) return c/2*t*t*t + b;
@@ -11,7 +12,7 @@ function easeInOutCubic(t, b, c, d) {
 
 function animateMarker(marker, i, steps, startLatLng, deltaLatLng) {
     var x = easeInOutCubic(i, startLatLng[0], deltaLatLng[0], steps),
-        y = easeInOutCubic(i, startLatLng[1], deltaLatLng[1], steps);
+    y = easeInOutCubic(i, startLatLng[1], deltaLatLng[1], steps);
 
     marker.setLatLng([x, y]);
 
@@ -20,42 +21,96 @@ function animateMarker(marker, i, steps, startLatLng, deltaLatLng) {
     }
 }
 
+function formatVehicleIconHTML(heading, routeId, directionSymbol, updateStatus) {
+    // FIXME: These are not being updated
+    var formattedVehicleHtml = AppConstants.Icons.VEHICLE;
+
+    formattedVehicleHtml = formattedVehicleHtml.replace('{svg-transform}', 'rotate(' + heading + ' 26 26)');
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id}', routeId);
+    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol}', directionSymbol);
+
+    var vehicleStatusColors = {
+        'green': 'rgb(53,169,38)',
+        'orange': 'rgb(206,156,43)',
+        'red': 'rgb(207,30,30)',
+    };
+    formattedVehicleHtml = formattedVehicleHtml.replace(/{vehicle-status-color}/g, vehicleStatusColors[updateStatus]);
+
+    var offsetIndex = String(routeId).length - 1;
+    var xOffsets = [23, 20, 17, 14];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-x-offset}', xOffsets[offsetIndex]);
+    var yOffsets = [24, 25, 26, 27.5];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{route-id-y-offset}', yOffsets[offsetIndex]);
+    var yDirectionOffsets = [35, 36, 37, 39];
+    formattedVehicleHtml = formattedVehicleHtml.replace('{direction-symbol-y-offset}', yDirectionOffsets[offsetIndex]);
+
+    return formattedVehicleHtml;
+}
+
 
 // Based on https://github.com/PaulLeCam/react-leaflet/blob/ba19dfc3db363b3b38a1d4131186d9168efc9504/src/Marker.js
-module.exports = React.createClass({
-  displayName: 'VehicleMarker',
+var VehicleMarker = React.createClass({
+    displayName: 'VehicleMarker',
 
-  mixins: [popupContainerMixin],
+    mixins: [popupContainerMixin],
 
-  propTypes: {
-    position: latlngType.isRequired,
-    animateSteps: React.PropTypes.number.isRequired,
-    label: React.PropTypes.string,
-  },
+    propTypes: {
+        position: latlngType.isRequired,
+        animateSteps: React.PropTypes.number.isRequired,
+        heading: React.PropTypes.number.isRequired,
+        routeId: React.PropTypes.number.isRequired,
+        directionSymbol: React.PropTypes.string.isRequired,
+        updateStatus: React.PropTypes.string.isRequired,
+    },
 
-  componentWillMount() {
-    var {map, position, ...props} = this.props;
-    this._leafletElement = Leaflet.marker(position, props);
+    componentWillMount() {
+        var {map, position, ...props} = this.props;
 
-    if (this.props.label) {
-        this._leafletElement.bindLabel(this.props.label, {
-            noHide: true,
-            direction: 'left',
-            className: 'vehicle-leaflet-label',
-            offset: [15, -7],
-       });
+        props.icon = Leaflet.divIcon({
+            className: 'vehicle-icon',
+            html: formatVehicleIconHTML(this.props.heading, this.props.routeId, this.props.directionSymbol, this.props.updateStatus),
+        });
+
+        this._leafletElement = Leaflet.marker(position, props);
+    },
+
+    componentDidUpdate(prevProps) {
+        if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
+            var marker = this.getLeafletElement();
+            var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
+            animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
+        }
+        if (this.props.heading !== prevProps.heading) {
+            var path = this._leafletElement._icon.querySelector('#circle-shape');
+            path.setAttribute('transform',  'rotate(' + this.props.heading + ' 26 26)');
+        }
+        if (this.props.updateStatus !== prevProps.updateStatus) {
+            var vehicleStatusColors = {
+                'green': 'rgb(53,169,38)',
+                'orange': 'rgb(206,156,43)',
+                'red': 'rgb(207,30,30)',
+            };
+            var color = vehicleStatusColors[this.props.updateStatus];
+
+            var circleBorder = this._leafletElement._icon.querySelector('#circle-border');
+            circleBorder.setAttribute('stroke', color);
+
+            var circleArrow = this._leafletElement._icon.querySelector('#circle-arrow');
+            circleArrow.setAttribute('fill', color);
+        }
+        if (this.props.directionSymbol != prevProps.directionSymbol) {
+            var directionSymbol = this._leafletElement._icon.querySelector('#direction-symbol tspan');
+            directionSymbol.innerHTML = this.props.directionSymbol;
+        }
+        // STRANGER: danger
+        // FIXME: What if the vehicle changes routes? The textOffsets will also need to be udpated
+    },
+
+    rotate(heading) {
+    },
+
+    changeColor(updateStatus) {
     }
-  },
-
-  componentDidUpdate(prevProps) {
-    if (this.props.position.lat !== prevProps.position.lat && this.props.position.lng !== prevProps.position.lng) {
-        var marker = this.getLeafletElement();
-        var deltaLatLng = [this.props.position.lat - prevProps.position.lat, this.props.position.lng - prevProps.position.lng];
-        animateMarker(marker, 0, this.props.animateSteps, [ prevProps.position.lat,  prevProps.position.lng], deltaLatLng);
-    }
-    if (this.props.label !== prevProps.label) {
-        this._leafletElement.label._content = this.props.label;
-        this._leafletElement.label._update();
-    }
-  }
 });
+
+module.exports = VehicleMarker;

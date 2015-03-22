@@ -30,8 +30,8 @@ module.exports = {
                 <defs></defs>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
                     <g id="circle-shape" transform="{svg-transform}">
-                        <path d="M26.2340426,43.137931 C35.7521414,43.137931 43.4680851,35.4958949 43.4680851,26.0689655 C43.4680851,16.6420362 35.7521414,9 26.2340426,9 C16.7159437,9 9,16.6420362 9,26.0689655 C9,35.4958949 16.7159437,43.137931 26.2340426,43.137931 Z" id="Oval-1" stroke="{vehicle-status-color}" stroke-width="1.5" opacity="0.95" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
-                        <path fill="{vehicle-status-color}" d="M25.9787234,0 L30.9574468,9.86206897 C30.9574468,9.86206897 28.7601812,9.17197602 26.210044,9.17197602 C23.6599069,9.17197602 21,9.86206897 21,9.86206897 L25.9787234,0 Z" id="Triangle-1" sketch:type="MSShapeGroup"></path>
+                        <path stroke="{vehicle-status-color}" id="circle-border" d="M26.2340426,43.137931 C35.7521414,43.137931 43.4680851,35.4958949 43.4680851,26.0689655 C43.4680851,16.6420362 35.7521414,9 26.2340426,9 C16.7159437,9 9,16.6420362 9,26.0689655 C9,35.4958949 16.7159437,43.137931 26.2340426,43.137931 Z" id="Oval-1" stroke-width="1.5" opacity="0.95" fill="#FFFFFF" sketch:type="MSShapeGroup"></path>
+                        <path fill="{vehicle-status-color}" id="circle-arrow" d="M25.9787234,0 L30.9574468,9.86206897 C30.9574468,9.86206897 28.7601812,9.17197602 26.210044,9.17197602 C23.6599069,9.17197602 21,9.86206897 21,9.86206897 L25.9787234,0 Z" id="Triangle-1" sketch:type="MSShapeGroup"></path>
                     </g>
                         <text id="route-id" sketch:type="MSTextLayer" font-family="Helvetica" font-size="10.5882353" font-weight="bold" sketch:alignment="middle" fill="#626262">
                             <tspan x="{route-id-x-offset}" y="{route-id-y-offset}">{route-id}</tspan>
