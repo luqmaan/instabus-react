@@ -5,7 +5,7 @@ var AppServerActionCreators = require('../actions/AppServerActionCreators');
 module.exports = {
     getAllRoutes() {
         request
-            .get('/gtfs/routes.json')
+            .get('gtfs/routes.json')
             .end((err, res) => {
                 // FIXME: Create error
                 var rawVehicles = res.body;
@@ -15,7 +15,7 @@ module.exports = {
 
     getStopsForRoute(routeId) {
         request
-            .get(`/gtfs/stops_${routeId}.json`)
+            .get(`gtfs/stops_${routeId}.json`)
             .end((err, res) => {
                 // FIXME: Create error action
                 var rawStops = res.body;
@@ -25,7 +25,7 @@ module.exports = {
 
     getPolylinesForRoute(routeId) {
         request
-            .get(`/gtfs/shapes_${routeId}.json`)
+            .get(`gtfs/shapes_${routeId}.json`)
             .end((err, res) => {
                 // FIXME: Create error action
                 var rawPolylines = res.body;
