@@ -18,37 +18,18 @@ body {
     margin: 0;
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    max-height: 100%;
-    overflow: hidden;
-}
-#app {
-    overflow: scroll;
 }
 .content-wrapper, .navbar {
     button:focus {
         outline: 0;
     }
 }
-.app-wrapper {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
 .content-wrapper {
-    margin: 20px 10px 0;
-    width: 800px;
-    max-width: 90vw;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
+    padding: 50px 0;
     .content {
-        flex: 1;
+        margin: 20px auto 0;
+        max-width: 90vw;
+        width: 800px;
     }
 
 }
@@ -140,6 +121,7 @@ body {
     box-sizing: border-box;
     flex: 1;
     z-index: 1000;
+    position: fixed;
 }
 #map-wrapper {
     position: absolute;

@@ -70,6 +70,10 @@ var App = React.createClass({
         else {
             routeSection = (
                 <div className='content-wrapper'>
+                    <div className='content'>
+                        <p>Tweet @luqmonster if you have any ideas or problems.</p>
+                        <p>Or fork <a href='https://github.com/luqmaan/instabus-react'>github.com/luqmaan/instabus-react</a>.</p>
+                    </div>
                     <RouteSection
                         routes={this.state.routes}
                         checkedRouteIds={this.state.checkedRouteIds} />

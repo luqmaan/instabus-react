@@ -23,8 +23,8 @@ function getRouteListItems(routes, checkedRouteIds) {
 var RouteSection = React.createClass({
 
     propTypes: {
-        routes: React.PropTypes.objectOf(React.PropTypes.object).isRequired,
-        checkedRouteIds: React.PropTypes.arrayOf(React.PropTypes.number).isRequired,
+        routes: React.PropTypes.objectOf(React.PropTypes.object),
+        checkedRouteIds: React.PropTypes.arrayOf(React.PropTypes.number),
     },
 
     onCheckRoutes() {
