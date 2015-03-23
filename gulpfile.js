@@ -98,5 +98,15 @@ gulp.task('webserver', function() {
     });
 });
 
+gulp.task('deploy-gh-pages', function() {
+    var ghpages = require('gulp-gh-pages');
+
+    return gulp.src('./build/**/*')
+         .pipe(ghpages({
+             cacheDir: '/tmp/instabus-react',
+             message: 'Deploy to gh-pages :poop:' + new Date(),
+         }));
+});
+
 gulp.task('build', ['clean', 'styles', 'browserify', 'copy-html', 'copy-gtfs']);
 gulp.task('default', ['build', 'webserver', 'watch']);
