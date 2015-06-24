@@ -29,3 +29,5 @@ tags
 
 # ignores specific to this repo
 build/
+
+.env
