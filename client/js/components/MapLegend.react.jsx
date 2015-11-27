@@ -8,7 +8,7 @@ var MapLegend = React.createClass({
     render() {
         return (
             <div className='map-legend'>
-                <div className='title'>Bus last spotted</div>
+                <div className='update-time'>Positions updated <b>{this.props.fleetUpdateTime}</b></div>
                 <div className='legend'>
                     <div className='colors'>
                         <span className='status1'></span>
@@ -25,7 +25,6 @@ var MapLegend = React.createClass({
                         <label>5m+</label>
                     </div>
                 </div>
-                <small className='update-time'>Fleet updated at <b>{this.props.fleetUpdateTime}</b></small>
             </div>
         );
     },
